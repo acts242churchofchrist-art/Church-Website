@@ -4,8 +4,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { siteConfig } from '@/data/site'
 
-// TODO: replace with custom domain when purchased
-const siteUrl = 'https://acts242.vercel.app'
+const siteUrl = 'https://www.acts242churchofchrist.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -50,8 +49,8 @@ const organizationSchema = {
   '@type': 'Church',
   name: siteConfig.fullChurchName,
   alternateName: siteConfig.churchName,
-  url: 'https://acts242.vercel.app',
-  logo: 'https://acts242.vercel.app/images/logo.svg',
+  url: 'https://www.acts242churchofchrist.com',
+  logo: 'https://www.acts242churchofchrist.com/images/logo.svg',
   email: siteConfig.email,
   telephone: siteConfig.phone,
   address: {

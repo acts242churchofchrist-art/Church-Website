@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getAllSermonsMeta } from '@/lib/sermons'
 import { lessons } from '@/data/lessons'
 
-const BASE_URL = 'https://acts242.vercel.app'
+const BASE_URL = 'https://www.acts242churchofchrist.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
