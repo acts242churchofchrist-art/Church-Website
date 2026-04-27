@@ -26,7 +26,7 @@ function DownloadButton({
       target="_blank"
       rel="noopener noreferrer"
       download={!isExternal || undefined}
-      className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+      className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-600 dark:bg-slate-700 dark:text-amber-300 dark:hover:bg-slate-600"
     >
       <svg
         width="14"
@@ -40,7 +40,7 @@ function DownloadButton({
         <path d="M7 1v8M4 6l3 3 3-3M2 11h10" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       {label}
-      {note && <span className="text-xs font-normal text-text-soft">{note}</span>}
+      {note && <span className="text-xs font-normal text-text-soft dark:text-slate-400">{note}</span>}
     </a>
   )
 }
@@ -59,9 +59,9 @@ export function CurrentWeekMaterialsCard() {
   if (!hasAnyMaterial) return null
 
   return (
-    <div className="mt-6 rounded-3xl border border-border bg-white p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">This Week</p>
-      <h2 className="mt-2 text-xl font-bold tracking-tight text-foreground">
+    <div className="mt-6 rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">This Week</p>
+      <h2 className="mt-2 text-xl font-bold tracking-tight text-foreground dark:text-slate-100">
         Download this Sunday's materials
       </h2>
       <div className="mt-5 flex flex-wrap gap-3">
@@ -78,8 +78,8 @@ export function CurrentWeekMaterialsCard() {
           <DownloadButton href={sermon.pptxUrl} label="Sermon Slides" note="(Google Drive)" isExternal />
         )}
       </div>
-      <p className="mt-4 text-sm text-text-soft">
-        <span className="font-medium text-foreground">"{sermon.title}"</span>
+      <p className="mt-4 text-sm text-text-soft dark:text-slate-400">
+        <span className="font-medium text-foreground dark:text-slate-100">"{sermon.title}"</span>
         {' '}— {sermon.preacher} · {formatDate(sermon.date)}
       </p>
     </div>
@@ -101,9 +101,9 @@ export function CurrentWeekMaterials() {
 
   return (
     <Section>
-      <div className="rounded-3xl border border-border bg-muted p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">This Week</p>
-        <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">
+      <div className="rounded-3xl border border-border bg-muted p-8 dark:border-slate-700 dark:bg-slate-800">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">This Week</p>
+        <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
           Download this Sunday's materials
         </h2>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -120,8 +120,8 @@ export function CurrentWeekMaterials() {
             <DownloadButton href={sermon.pptxUrl} label="Sermon Slides" note="(Google Drive)" isExternal />
           )}
         </div>
-        <p className="mt-5 text-sm text-text-soft">
-          <span className="font-medium text-foreground">"{sermon.title}"</span>
+        <p className="mt-5 text-sm text-text-soft dark:text-slate-400">
+          <span className="font-medium text-foreground dark:text-slate-100">"{sermon.title}"</span>
           {' '}— {sermon.preacher} · {formatDate(sermon.date)}
         </p>
       </div>

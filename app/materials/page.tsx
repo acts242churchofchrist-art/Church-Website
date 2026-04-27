@@ -32,8 +32,8 @@ export default function MaterialsPage() {
 
       {/* ── Foundation Guide — Featured Hero ── */}
       {foundationGuide && (
-        <Section className="bg-muted">
-          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+        <Section className="bg-muted dark:bg-slate-900">
+          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
             Start Here
           </p>
           <MaterialHeroCard item={foundationGuide} />
@@ -44,10 +44,10 @@ export default function MaterialsPage() {
       {foundationExtras.length > 0 && (
         <Section>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               Foundation and Discipleship
             </p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
               More discipleship resources
             </h2>
           </div>
@@ -62,13 +62,13 @@ export default function MaterialsPage() {
       {/* ── Evangelism Materials ── */}
       <Section>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
             Evangelism Materials
           </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
             Share the gospel
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft">
+          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft dark:text-slate-400">
             These materials are designed for first conversations — hand them out after a
             conversation, at the gate, in your community, or after Sunday service.
           </p>
@@ -81,15 +81,15 @@ export default function MaterialsPage() {
       </Section>
 
       {/* ── Sermon Materials ── */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
             Sermon Materials
           </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
             Continue in the teaching
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft">
+          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft dark:text-slate-400">
             Browse weekly sermon outlines, brochures, and recordings from Acts 242 Church of
             Christ.
           </p>

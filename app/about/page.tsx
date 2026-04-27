@@ -49,12 +49,12 @@ export default function AboutPage() {
       </Section>
 
       {/* ── 2. Why the Name ── */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">The name</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">Why Acts 242</h2>
-            <p className="mt-4 text-base leading-8 text-text-soft">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">The name</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Why Acts 242</h2>
+            <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
               The name comes from Acts 2:42. It reflects a church life centered on Scripture,
               fellowship, the breaking of bread, and prayer. We do not want to build around trends.
               We want to remain close to the pattern God has given in His Word.
@@ -67,19 +67,19 @@ export default function AboutPage() {
       {/* ── 3. Mission and Vision ── */}
       <Section>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-border bg-white p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {missionVision.mission.label}
             </p>
-            <p className="mt-4 text-lg font-medium leading-8 text-foreground">
+            <p className="mt-4 text-lg font-medium leading-8 text-foreground dark:text-slate-200">
               {missionVision.mission.text}
             </p>
           </div>
-          <div className="rounded-3xl border border-border bg-white p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {missionVision.vision.label}
             </p>
-            <p className="mt-4 text-lg font-medium leading-8 text-foreground">
+            <p className="mt-4 text-lg font-medium leading-8 text-foreground dark:text-slate-200">
               {missionVision.vision.text}
             </p>
           </div>
@@ -87,32 +87,32 @@ export default function AboutPage() {
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {missionVision.values.map((value) => (
-            <div key={value.title} className="rounded-3xl border border-border bg-muted p-6">
-              <h3 className="text-base font-semibold text-foreground">{value.title}</h3>
-              <p className="mt-2 text-sm leading-7 text-text-soft">{value.description}</p>
+            <div key={value.title} className="rounded-3xl border border-border bg-muted p-6 dark:border-slate-700 dark:bg-slate-900">
+              <h3 className="text-base font-semibold text-foreground dark:text-slate-100">{value.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-text-soft dark:text-slate-400">{value.description}</p>
             </div>
           ))}
         </div>
       </Section>
 
       {/* ── 4. Our Story ── */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Our Story</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Our Story</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
               A church built over a decade of faithfulness
             </h2>
-            <p className="mt-4 text-base leading-8 text-text-soft">
+            <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
               Acts 242 began as a small fellowship in Parañaque, founded by Bro. Marc after years
               of walking with the Lord from his early twenties. What started as Mustard Seed Faith
               Christian Church grew in faith, size, and clarity of identity until it was formally
               incorporated as Acts 242 Church of Christ Corporation by the Philippine SEC in
               February 2026.
             </p>
-            <p className="mt-4 text-base leading-8 text-text-soft">
+            <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
               The name Acts 242 was not chosen lightly. It reflects the heartbeat we want to keep:
-              devoted to the apostles' teaching, to fellowship, to the breaking of bread, and to
+              devoted to the apostles&apos; teaching, to fellowship, to the breaking of bread, and to
               prayer. This is not a program. It is a pattern — the same pattern that shaped the
               first church, and the one we are building our lives around today.
             </p>
@@ -130,8 +130,8 @@ export default function AboutPage() {
                 className="w-full rounded-3xl object-cover"
               />
             ) : (
-              <div className="flex h-64 items-center justify-center rounded-3xl bg-navy/10 lg:h-80">
-                <p className="text-sm font-medium text-navy/40">Acts 242 Worship Hall</p>
+              <div className="flex h-64 items-center justify-center rounded-3xl bg-navy/10 lg:h-80 dark:bg-amber-300/10">
+                <p className="text-sm font-medium text-navy/40 dark:text-amber-300/60">Acts 242 Worship Hall</p>
               </div>
             )}
           </div>
@@ -140,25 +140,25 @@ export default function AboutPage() {
 
       {/* ── 5. Meet the Pastor ── */}
       <Section>
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Pastor</p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground">Meet the pastor</h2>
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Pastor</p>
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Meet the pastor</h2>
 
-        <div className="mt-8 rounded-3xl border border-border bg-white p-8 md:p-10">
+        <div className="mt-8 rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
           <div className="flex flex-col gap-8 md:flex-row md:items-start">
             <div className="flex flex-col items-center gap-2 md:items-start">
               <DevNote label="Pastor photo pending — add to /public/images/leadership/bro-marc.jpg" />
               <LeaderAvatar name={pastor.name} photo={pastor.photo} size="lg" />
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-foreground">{pastor.name}</h3>
-              <p className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+              <h3 className="text-2xl font-bold text-foreground dark:text-slate-100">{pastor.name}</h3>
+              <p className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
                 {pastor.title}
               </p>
-              <p className="mt-2 text-sm text-text-soft">{pastor.ministry}</p>
+              <p className="mt-2 text-sm text-text-soft dark:text-slate-400">{pastor.ministry}</p>
               {pastor.bio && (
-                <p className="mt-5 text-base leading-8 text-text-soft">{pastor.bio}</p>
+                <p className="mt-5 text-base leading-8 text-text-soft dark:text-slate-400">{pastor.bio}</p>
               )}
-              <p className="mt-6 text-sm italic text-text-soft">
+              <p className="mt-6 text-sm italic text-text-soft dark:text-slate-400">
                 Acts 242 Church of Christ is a registered non-stock corporation under the
                 Securities and Exchange Commission of the Philippines.
               </p>
@@ -168,9 +168,9 @@ export default function AboutPage() {
       </Section>
 
       {/* ── 6. Core Leadership ── */}
-      <Section className="bg-muted">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Leadership</p>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground">
+      <Section className="bg-muted dark:bg-slate-900">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Leadership</p>
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
           The people who lead us
         </h2>
 
@@ -178,15 +178,15 @@ export default function AboutPage() {
           {coreLeadership.map((leader) => (
             <div
               key={leader.name}
-              className="flex flex-col items-center rounded-3xl border border-border bg-white p-8 text-center"
+              className="flex flex-col items-center rounded-3xl border border-border bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-800"
             >
               <DevNote label="Leadership photos pending" />
               <LeaderAvatar name={leader.name} photo={leader.photo} size="md" />
-              <h3 className="mt-4 text-lg font-semibold text-foreground">{leader.name}</h3>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+              <h3 className="mt-4 text-lg font-semibold text-foreground dark:text-slate-100">{leader.name}</h3>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
                 {leader.title}
               </p>
-              <p className="mt-2 text-sm leading-6 text-text-soft">{leader.ministry}</p>
+              <p className="mt-2 text-sm leading-6 text-text-soft dark:text-slate-400">{leader.ministry}</p>
             </div>
           ))}
         </div>
@@ -194,8 +194,8 @@ export default function AboutPage() {
 
       {/* ── 7. Extended Team ── */}
       <Section>
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Our Team</p>
-        <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Our Team</p>
+        <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
           Serving together
         </h2>
 
@@ -203,13 +203,13 @@ export default function AboutPage() {
           {extendedTeam.map((member) => (
             <div
               key={member.name}
-              className="flex items-center gap-4 rounded-2xl border border-border bg-muted p-4"
+              className="flex items-center gap-4 rounded-2xl border border-border bg-muted p-4 dark:border-slate-700 dark:bg-slate-900"
             >
               <LeaderAvatar name={member.name} photo={member.photo} size="sm" />
               <div>
-                <p className="text-sm font-semibold text-foreground">{member.name}</p>
-                <p className="text-xs text-navy">{member.title}</p>
-                <p className="mt-0.5 text-xs text-text-soft">{member.ministry}</p>
+                <p className="text-sm font-semibold text-foreground dark:text-slate-100">{member.name}</p>
+                <p className="text-xs text-navy dark:text-amber-300">{member.title}</p>
+                <p className="mt-0.5 text-xs text-text-soft dark:text-slate-400">{member.ministry}</p>
               </div>
             </div>
           ))}
@@ -217,13 +217,13 @@ export default function AboutPage() {
       </Section>
 
       {/* ── 8. Location ── */}
-      <Section className="bg-muted">
-        <div className="rounded-3xl border border-border bg-white p-8 md:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Location</p>
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground">
+      <Section className="bg-muted dark:bg-slate-900">
+        <div className="rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Location</p>
+          <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
             {siteConfig.fullChurchName}
           </h2>
-          <p className="mt-3 text-base text-text-soft">{siteConfig.address}</p>
+          <p className="mt-3 text-base text-text-soft dark:text-slate-400">{siteConfig.address}</p>
           <div className="mt-6 flex flex-wrap gap-4">
             <ButtonLink href="/connect">Get in touch</ButtonLink>
             <ButtonLink href="/live" variant="secondary">
@@ -233,7 +233,7 @@ export default function AboutPage() {
               href={siteConfig.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-2xl border border-border bg-white px-5 py-3 text-sm font-semibold text-navy transition hover:bg-muted"
+              className="inline-flex items-center rounded-2xl border border-border bg-white px-5 py-3 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
             >
               Get directions ↗
             </a>

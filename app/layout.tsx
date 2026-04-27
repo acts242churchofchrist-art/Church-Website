@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { Providers } from '@/components/layout/providers'
 import { siteConfig } from '@/data/site'
 
 const siteUrl = 'https://www.acts242churchofchrist.com'
@@ -66,17 +67,19 @@ const organizationSchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className="min-h-screen bg-background text-foreground antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      <body className="min-h-screen bg-background text-foreground antialiased dark:bg-slate-950 dark:text-slate-100">
+        <Providers>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

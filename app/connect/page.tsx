@@ -46,12 +46,12 @@ export default function ConnectPage() {
       </Section>
 
       {/* Contact entry cards */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">New here</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">First time or exploring faith</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">New here</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">First time or exploring faith</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
               If you are visiting for the first time or curious about Christianity, fill out a short welcome form. We would love to know you and follow up personally.
             </p>
             <ButtonLink href="/welcome" variant="ghost" className="mt-6 px-0">
@@ -59,10 +59,10 @@ export default function ConnectPage() {
             </ButtonLink>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Prayer and counsel</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">Prayer request</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Prayer and counsel</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Prayer request</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
               Share a prayer request with our pastoral team. We will pray for you personally and follow up if you'd like.
             </p>
             <ButtonLink href="/prayer-request" variant="ghost" className="mt-6 px-0">
@@ -70,10 +70,10 @@ export default function ConnectPage() {
             </ButtonLink>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Next step</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">Ready for baptism or discipleship</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Next step</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Ready for baptism or discipleship</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
               If you have gone through the lessons and are ready for water baptism, or want to begin one-on-one discipleship, let us know below.
             </p>
             <ButtonLink href="/discipleship/water-baptism" variant="ghost" className="mt-6 px-0">
@@ -92,33 +92,33 @@ export default function ConnectPage() {
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="space-y-6">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Talk to a pastor</p>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">We would love to hear from you</h2>
-              <p className="mt-4 text-base leading-8 text-text-soft">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Talk to a pastor</p>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">We would love to hear from you</h2>
+              <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
                 Fill out the form and we will get back to you within 48 hours. You can also reach us by email or phone.
               </p>
             </div>
             <div className="space-y-3 text-sm">
               <p>
-                <span className="font-semibold text-foreground">Email: </span>
-                <a href={`mailto:${siteConfig.email}`} className="text-navy hover:underline">{siteConfig.email}</a>
+                <span className="font-semibold text-foreground dark:text-slate-200">Email: </span>
+                <a href={`mailto:${siteConfig.email}`} className="text-navy hover:underline dark:text-amber-300">{siteConfig.email}</a>
               </p>
               <p>
-                <span className="font-semibold text-foreground">Phone / Text: </span>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="text-navy hover:underline">{siteConfig.phone}</a>
+                <span className="font-semibold text-foreground dark:text-slate-200">Phone / Text: </span>
+                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="text-navy hover:underline dark:text-amber-300">{siteConfig.phone}</a>
               </p>
               <p>
-                <span className="font-semibold text-foreground">Messenger: </span>
-                <a href={siteConfig.messengerUrl} target="_blank" rel="noopener noreferrer" className="text-navy hover:underline">Facebook Messenger</a>
+                <span className="font-semibold text-foreground dark:text-slate-200">Messenger: </span>
+                <a href={siteConfig.messengerUrl} target="_blank" rel="noopener noreferrer" className="text-navy hover:underline dark:text-amber-300">Facebook Messenger</a>
               </p>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-8">
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
             {status === 'success' ? (
               <div className="space-y-4 text-center">
-                <p className="text-2xl font-bold tracking-tight text-foreground">Message received.</p>
-                <p className="text-base leading-8 text-text-soft">
+                <p className="text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">Message received.</p>
+                <p className="text-base leading-8 text-text-soft dark:text-slate-400">
                   Thank you for reaching out. We will get back to you within 48 hours.
                 </p>
                 <ButtonLink href="/" variant="secondary" className="mt-2">Back to home</ButtonLink>
@@ -159,7 +159,7 @@ export default function ConnectPage() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft disabled:opacity-60 dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200"
                 >
                   {status === 'submitting' ? 'Sending...' : 'Send message'}
                 </button>
@@ -170,29 +170,29 @@ export default function ConnectPage() {
       </Section>
 
       {/* Service times + location */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-border bg-white p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Service schedule</p>
-            <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground">Join us in person</h2>
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Service schedule</p>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">Join us in person</h2>
             <div className="mt-6 space-y-4">
               {siteConfig.serviceHours.map((s) => (
-                <div key={s.day} className="flex items-start justify-between gap-4 border-b border-border pb-4 last:border-0 last:pb-0">
+                <div key={s.day} className="flex items-start justify-between gap-4 border-b border-border pb-4 last:border-0 last:pb-0 dark:border-slate-700">
                   <div>
-                    <p className="font-semibold text-foreground">{s.day}</p>
-                    <p className="text-xs text-text-soft">{s.description}</p>
+                    <p className="font-semibold text-foreground dark:text-slate-200">{s.day}</p>
+                    <p className="text-xs text-text-soft dark:text-slate-400">{s.description}</p>
                   </div>
-                  <p className="shrink-0 text-sm text-text-soft">{s.time}</p>
+                  <p className="shrink-0 text-sm text-text-soft dark:text-slate-400">{s.time}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Find us</p>
-            <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground">{siteConfig.fullChurchName}</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">{siteConfig.address}</p>
-            <p className="mt-1 text-xs text-text-soft">Beside Security Bank Lopez Branch</p>
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Find us</p>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">{siteConfig.fullChurchName}</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">{siteConfig.address}</p>
+            <p className="mt-1 text-xs text-text-soft dark:text-slate-400">Beside Security Bank Lopez Branch</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink href={siteConfig.mapsUrl} variant="secondary">Get directions</ButtonLink>
               <ButtonLink href={siteConfig.messengerUrl} variant="ghost">Message on Facebook</ButtonLink>

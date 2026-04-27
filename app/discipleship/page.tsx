@@ -24,22 +24,22 @@ export default function DiscipleshipPage() {
         />
       </Section>
 
-      <Section className="bg-muted">
-        <div className="rounded-3xl border border-border bg-white p-8 md:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">The journey</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">Seven lessons, one step at a time</h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft">
+      <Section className="bg-muted dark:bg-slate-900">
+        <div className="rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">The journey</p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Seven lessons, one step at a time</h2>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft dark:text-slate-400">
             Take these lessons in order. Read the passages carefully. Pray through what you learn. Take your next step when you are ready.
           </p>
           <ol className="mt-8 space-y-5">
             {lessons.map((lesson) => (
               <li key={lesson.slug} className="flex items-start gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-bold text-navy">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-bold text-navy dark:border-slate-600 dark:bg-slate-900 dark:text-amber-300">
                   {lesson.lessonNumber}
                 </span>
                 <div>
-                  <p className="font-semibold text-foreground">{lesson.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-text-soft">{lesson.summary}</p>
+                  <p className="font-semibold text-foreground dark:text-slate-100">{lesson.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-text-soft dark:text-slate-400">{lesson.summary}</p>
                 </div>
               </li>
             ))}
@@ -50,8 +50,8 @@ export default function DiscipleshipPage() {
       <Section>
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Lessons</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">Open a lesson and begin</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Lessons</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Open a lesson and begin</h2>
           </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -61,7 +61,7 @@ export default function DiscipleshipPage() {
         </div>
       </Section>
 
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <CtaBand
           title="Water baptism"
           description="If you are ready to obey Christ in water baptism, we encourage you to speak with a pastor or church leader and take your next step with understanding and faith."

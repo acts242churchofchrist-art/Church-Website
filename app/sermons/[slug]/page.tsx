@@ -117,22 +117,22 @@ export default async function SermonPage({ params }: Props) {
       ) : (
         <Section>
           <div className="max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {formatDate(sermon.date)} — {sermon.preacher}
             </p>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl dark:text-slate-100">
               {sermon.title}
             </h1>
-            <p className="mt-3 text-base font-medium text-navy">{sermon.passage}</p>
-            <p className="mt-4 text-lg leading-8 text-text-soft">{sermon.summary}</p>
+            <p className="mt-3 text-base font-medium text-navy dark:text-amber-300">{sermon.passage}</p>
+            <p className="mt-4 text-lg leading-8 text-text-soft dark:text-slate-400">{sermon.summary}</p>
           </div>
         </Section>
       )}
 
       {/* ── 2. Video embed ── */}
-      <Section className={hasPoster ? '' : 'bg-muted'}>
+      <Section className={hasPoster ? '' : 'bg-muted dark:bg-slate-900'}>
         {sermon.youtubeUrl ? (
-          <div className="overflow-hidden rounded-3xl border border-border bg-black">
+          <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">
             <iframe
               className="aspect-video w-full"
               src={youtubeEmbedUrl(sermon.youtubeUrl)}
@@ -144,7 +144,7 @@ export default async function SermonPage({ params }: Props) {
         ) : sermon.facebookUrl ? (
           /* Facebook Live videos are portrait (9:16). Centre the iframe and cap width so it doesn't stretch wide. */
           <div className="flex justify-center">
-            <div className="overflow-hidden rounded-3xl border border-border bg-black" style={{ width: '100%', maxWidth: 420 }}>
+            <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700" style={{ width: '100%', maxWidth: 420 }}>
               <iframe
                 src={facebookEmbedUrl(sermon.facebookUrl)}
                 className="w-full"
@@ -156,15 +156,15 @@ export default async function SermonPage({ params }: Props) {
             </div>
           </div>
         ) : (
-          <div className="rounded-3xl border border-border bg-white p-6 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Recording</p>
-            <p className="mt-3 text-base text-text-soft">
-              Recording will be posted after Sunday's service.{' '}
+          <div className="rounded-3xl border border-border bg-white p-6 text-center dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Recording</p>
+            <p className="mt-3 text-base text-text-soft dark:text-slate-400">
+              Recording will be posted after Sunday&apos;s service.{' '}
               <a
                 href={siteConfig.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-navy hover:underline"
+                className="font-semibold text-navy hover:underline dark:text-amber-300"
               >
                 Subscribe on YouTube
               </a>{' '}
@@ -177,7 +177,7 @@ export default async function SermonPage({ params }: Props) {
       {/* ── 3. Sermon prose ── */}
       <Section>
         <div className="mx-auto max-w-3xl">
-          <article className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-navy prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-[1.85] prose-p:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-navy prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-text-soft prose-blockquote:not-italic prose-strong:text-foreground prose-strong:font-semibold prose-a:text-navy prose-a:no-underline hover:prose-a:underline">
+          <article className="sermon-prose prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-navy prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-[1.85] prose-p:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-navy prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-text-soft prose-blockquote:not-italic prose-strong:text-foreground prose-strong:font-semibold prose-a:text-navy prose-a:no-underline hover:prose-a:underline dark:prose-invert">
             <MDXContent />
           </article>
         </div>
@@ -185,10 +185,10 @@ export default async function SermonPage({ params }: Props) {
 
       {/* ── 4. Brochure panels ── */}
       {hasBrochure && (
-        <Section className="bg-muted">
+        <Section className="bg-muted dark:bg-slate-900">
           <div className="mx-auto max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Sunday Brochure</p>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">This week's brochure</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Sunday Brochure</p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">This week&apos;s brochure</h2>
             <div className="mt-8 space-y-6">
               {sermon.brochureImages?.front && (
                 <div>
@@ -198,7 +198,7 @@ export default async function SermonPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="group block"
                   >
-                    <div className="overflow-hidden rounded-2xl border border-border">
+                    <div className="overflow-hidden rounded-2xl border border-border dark:border-slate-700">
                       <Image
                         src={sermon.brochureImages.front}
                         alt={`${sermon.title} — brochure front`}
@@ -208,7 +208,7 @@ export default async function SermonPage({ params }: Props) {
                       />
                     </div>
                   </a>
-                  <p className="mt-2 text-xs text-text-soft">Front — click to open full size</p>
+                  <p className="mt-2 text-xs text-text-soft dark:text-slate-400">Front — click to open full size</p>
                 </div>
               )}
               {sermon.brochureImages?.inside && (
@@ -219,7 +219,7 @@ export default async function SermonPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="group block"
                   >
-                    <div className="overflow-hidden rounded-2xl border border-border">
+                    <div className="overflow-hidden rounded-2xl border border-border dark:border-slate-700">
                       <Image
                         src={sermon.brochureImages.inside}
                         alt={`${sermon.title} — brochure inside`}
@@ -229,7 +229,7 @@ export default async function SermonPage({ params }: Props) {
                       />
                     </div>
                   </a>
-                  <p className="mt-2 text-xs text-text-soft">Inside — click to open full size</p>
+                  <p className="mt-2 text-xs text-text-soft dark:text-slate-400">Inside — click to open full size</p>
                 </div>
               )}
             </div>
@@ -239,17 +239,17 @@ export default async function SermonPage({ params }: Props) {
 
       {/* ── 5. Resources ── */}
       {(hasVideo || sermon.pptxUrl || sermon.posterImage || hasBrochure) && (
-        <Section className={hasBrochure ? '' : 'bg-muted'}>
+        <Section className={hasBrochure ? '' : 'bg-muted dark:bg-slate-900'}>
           <div className="mx-auto max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Resources</p>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground">Download & share</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Resources</p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">Download &amp; share</h2>
             <div className="mt-6 flex flex-wrap gap-3">
               {sermon.youtubeUrl && (
                 <a
                   href={sermon.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Watch on YouTube ↗
                 </a>
@@ -259,7 +259,7 @@ export default async function SermonPage({ params }: Props) {
                   href={sermon.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Watch on Facebook ↗
                 </a>
@@ -269,10 +269,10 @@ export default async function SermonPage({ params }: Props) {
                   href={sermon.pptxUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Download Slides ↗
-                  <span className="text-xs font-normal text-text-soft">(Google Drive)</span>
+                  <span className="text-xs font-normal text-text-soft dark:text-slate-400">(Google Drive)</span>
                 </a>
               )}
               {sermon.posterImage && (
@@ -280,7 +280,7 @@ export default async function SermonPage({ params }: Props) {
                   href={sermon.posterImage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Download Poster ↗
                 </a>
@@ -290,7 +290,7 @@ export default async function SermonPage({ params }: Props) {
                   href={sermon.brochureImages.front}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Download Brochure (Front) ↗
                 </a>
@@ -300,7 +300,7 @@ export default async function SermonPage({ params }: Props) {
                   href={sermon.brochureImages.inside}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Download Brochure (Inside) ↗
                 </a>
@@ -311,17 +311,17 @@ export default async function SermonPage({ params }: Props) {
       )}
 
       {/* ── 6. Navigation footer ── */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="mx-auto max-w-3xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 dark:border-slate-700">
             {/* Previous = older sermon */}
             <div className="min-w-0">
               {previous ? (
                 <a href={`/sermons/${previous.slug}`} className="group flex flex-col">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-soft dark:text-slate-400">
                     ← Previous sermon
                   </span>
-                  <span className="mt-1 text-sm font-semibold text-navy group-hover:underline line-clamp-1">
+                  <span className="mt-1 text-sm font-semibold text-navy group-hover:underline line-clamp-1 dark:text-amber-300">
                     {previous.title}
                   </span>
                 </a>
@@ -338,10 +338,10 @@ export default async function SermonPage({ params }: Props) {
             <div className="min-w-0 text-right">
               {next ? (
                 <a href={`/sermons/${next.slug}`} className="group flex flex-col items-end">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-soft">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-soft dark:text-slate-400">
                     Next sermon →
                   </span>
-                  <span className="mt-1 text-sm font-semibold text-navy group-hover:underline line-clamp-1">
+                  <span className="mt-1 text-sm font-semibold text-navy group-hover:underline line-clamp-1 dark:text-amber-300">
                     {next.title}
                   </span>
                 </a>

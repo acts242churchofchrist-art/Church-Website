@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
 import { siteConfig } from '@/data/site'
 import { ButtonLink } from '@/components/ui/button-link'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -19,20 +21,27 @@ const navItems = [
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  const { resolvedTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   function isActive(href: string) {
     if (href === '/') return pathname === '/'
     return pathname.startsWith(href)
   }
 
+  const logoSrc = mounted && resolvedTheme === 'dark' ? '/images/logo-white.svg' : '/images/logo.svg'
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-950/95">
       <div className="mx-auto flex max-w-content items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center">
-          {/* SVG preferred; falls back to PNG if SVG not yet uploaded */}
           <Image
-            src="/images/logo.svg"
+            src={logoSrc}
             alt={siteConfig.fullChurchName}
             width={120}
             height={48}
@@ -40,7 +49,7 @@ export function Header() {
             priority
             onError={(e) => {
               const img = e.currentTarget as HTMLImageElement
-              img.src = '/images/logo.png'
+              img.src = mounted && resolvedTheme === 'dark' ? '/images/logo-dark.png' : '/images/logo.png'
             }}
           />
         </Link>
@@ -51,7 +60,9 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={`text-sm font-medium transition ${
-                isActive(item.href) ? 'text-navy font-semibold' : 'text-foreground hover:text-navy'
+                isActive(item.href)
+                  ? 'font-semibold text-navy dark:text-amber-300'
+                  : 'text-foreground hover:text-navy dark:text-slate-300 dark:hover:text-amber-300'
               }`}
             >
               {item.label}
@@ -59,42 +70,48 @@ export function Header() {
           ))}
         </nav>
 
-        <Link
-          href="/welcome"
-          className="hidden rounded-2xl border border-border px-4 py-2 text-sm font-semibold text-navy hover:bg-muted md:inline-flex"
-        >
-          Start Here
-        </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <Link
+            href="/welcome"
+            className="rounded-2xl border border-border px-4 py-2 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+          >
+            Start Here
+          </Link>
+        </div>
 
         <button
-          className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-navy md:hidden"
+          className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-navy dark:text-slate-200 md:hidden"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
-          <span className="block h-0.5 w-5 bg-navy" />
-          <span className="block h-0.5 w-5 bg-navy" />
-          <span className="block h-0.5 w-5 bg-navy" />
+          <span className="block h-0.5 w-5 bg-current" />
+          <span className="block h-0.5 w-5 bg-current" />
+          <span className="block h-0.5 w-5 bg-current" />
         </button>
       </div>
 
       {menuOpen && (
-        <div className="absolute left-0 right-0 top-full border-b border-border bg-white shadow-calm md:hidden">
+        <div className="absolute left-0 right-0 top-full border-b border-border bg-white shadow-calm dark:border-slate-800 dark:bg-slate-950 md:hidden">
           <nav className="mx-auto flex flex-col px-4 pb-4 pt-2 sm:px-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`border-b border-border py-3 text-sm font-medium last:border-0 ${
-                  isActive(item.href) ? 'text-navy font-semibold' : 'text-foreground hover:text-navy'
+                className={`border-b border-border py-3 text-sm font-medium last:border-0 dark:border-slate-800 ${
+                  isActive(item.href)
+                    ? 'font-semibold text-navy dark:text-amber-300'
+                    : 'text-foreground hover:text-navy dark:text-slate-300 dark:hover:text-amber-300'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="pt-4">
-              <ButtonLink href="/welcome" onClick={() => setMenuOpen(false)} className="w-full justify-center">
+            <div className="flex items-center justify-between gap-3 pt-4">
+              <ThemeToggle />
+              <ButtonLink href="/welcome" onClick={() => setMenuOpen(false)} className="flex-1 justify-center">
                 Start Here
               </ButtonLink>
             </div>

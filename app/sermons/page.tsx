@@ -24,7 +24,7 @@ function SermonCard({ sermon }: { sermon: SermonFrontmatter }) {
   return (
     <Link
       href={`/sermons/${sermon.slug}`}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-0.5 hover:shadow-calm"
+      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-0.5 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800"
     >
       {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden bg-navy">
@@ -45,19 +45,19 @@ function SermonCard({ sermon }: { sermon: SermonFrontmatter }) {
 
       {/* Card body */}
       <div className="flex flex-1 flex-col p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
           {formatDate(sermon.date)}
         </p>
-        <h2 className="mt-2 text-lg font-semibold leading-snug text-foreground line-clamp-2">
+        <h2 className="mt-2 text-lg font-semibold leading-snug text-foreground line-clamp-2 dark:text-slate-100">
           {sermon.title}
         </h2>
-        <p className="mt-1 text-sm text-text-soft">
+        <p className="mt-1 text-sm text-text-soft dark:text-slate-400">
           {sermon.passage} — {sermon.preacher}
         </p>
-        <p className="mt-3 flex-1 text-sm leading-7 text-text-soft line-clamp-2">
+        <p className="mt-3 flex-1 text-sm leading-7 text-text-soft line-clamp-2 dark:text-slate-400">
           {sermon.summary}
         </p>
-        <span className="mt-5 text-sm font-semibold text-navy group-hover:underline">
+        <span className="mt-5 text-sm font-semibold text-navy group-hover:underline dark:text-amber-300">
           Read message notes →
         </span>
       </div>
@@ -72,24 +72,24 @@ export default function SermonsPage() {
     <>
       <Section>
         <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy">Sermons</p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Sermons</p>
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl dark:text-slate-100">
             Biblical teaching for every season
           </h1>
-          <p className="mt-6 text-lg leading-8 text-text-soft">
+          <p className="mt-6 text-lg leading-8 text-text-soft dark:text-slate-400">
             Preaching from Acts 242 Church of Christ. Every message is grounded in Scripture and aimed at helping people follow Jesus more faithfully.
           </p>
         </div>
       </Section>
 
       {/* ── 2026 Current Year ── */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {siteConfig.yearThemeYear} — {siteConfig.yearTheme}
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
               {siteConfig.yearThemeYear} Sermons
             </h2>
           </div>
@@ -99,11 +99,11 @@ export default function SermonsPage() {
         </div>
 
         {sermons.length === 0 ? (
-          <div className="mt-10 rounded-3xl border border-border bg-white p-8 text-center">
-            <p className="text-base font-semibold text-foreground">
+          <div className="mt-10 rounded-3xl border border-border bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-base font-semibold text-foreground dark:text-slate-100">
               Our first sermons for {siteConfig.yearThemeYear} will be published here soon.
             </p>
-            <p className="mt-2 text-sm text-text-soft">
+            <p className="mt-2 text-sm text-text-soft dark:text-slate-400">
               Subscribe on YouTube to be notified when new messages are posted.
             </p>
             <div className="mt-6">
@@ -122,9 +122,9 @@ export default function SermonsPage() {
       {/* ── Sermon Archive ── */}
       <Section>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Archive</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground">Browse past sermons</h2>
-          <p className="mt-3 text-base text-text-soft">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Archive</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Browse past sermons</h2>
+          <p className="mt-3 text-base text-text-soft dark:text-slate-400">
             Sermons from previous years are available as downloadable archives on Google Drive.
           </p>
         </div>
@@ -133,15 +133,15 @@ export default function SermonsPage() {
           {sermonArchive.map((year) => (
             <div
               key={year.year}
-              className="flex flex-col justify-between gap-4 rounded-3xl border border-border bg-muted p-6 sm:flex-row sm:items-center"
+              className="flex flex-col justify-between gap-4 rounded-3xl border border-border bg-muted p-6 sm:flex-row sm:items-center dark:border-slate-700 dark:bg-slate-900"
             >
               <div>
-                <p className="text-lg font-semibold text-foreground">{year.label}</p>
+                <p className="text-lg font-semibold text-foreground dark:text-slate-100">{year.label}</p>
                 {year.description && !year.description.startsWith('MOCKUP') && (
-                  <p className="mt-1 text-sm text-text-soft">{year.description}</p>
+                  <p className="mt-1 text-sm text-text-soft dark:text-slate-400">{year.description}</p>
                 )}
                 {year.sermonCount && (
-                  <p className="mt-1 text-xs text-text-soft">
+                  <p className="mt-1 text-xs text-text-soft dark:text-slate-400">
                     {year.sermonCount} sermons
                   </p>
                 )}
@@ -150,7 +150,7 @@ export default function SermonsPage() {
                 href={year.driveFolderUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted"
+                className="inline-flex shrink-0 items-center rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
               >
                 Open {year.year} Archive ↗
               </a>

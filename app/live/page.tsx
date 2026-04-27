@@ -37,8 +37,8 @@ export default function LivePage() {
         />
       </Section>
 
-      <Section className="bg-muted">
-        <div className="overflow-hidden rounded-3xl border border-border bg-black">
+      <Section className="bg-muted dark:bg-slate-900">
+        <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">
           <iframe
             className="aspect-video w-full"
             src={siteConfig.liveEmbedUrl}
@@ -54,17 +54,17 @@ export default function LivePage() {
       <Section>
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Recent messages</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">Continue in the teaching</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Recent messages</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Continue in the teaching</h2>
           </div>
           <ButtonLink href="/sermons" variant="ghost">All sermons</ButtonLink>
         </div>
 
         {recentSermons.length === 0 ? (
-          <div className="mt-10 rounded-3xl border border-border bg-muted p-8 text-center">
-            <p className="text-base text-text-soft">
+          <div className="mt-10 rounded-3xl border border-border bg-muted p-8 text-center dark:border-slate-700 dark:bg-slate-900">
+            <p className="text-base text-text-soft dark:text-slate-400">
               Sermons will be posted here after each Sunday service.{' '}
-              <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-navy hover:underline">
+              <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-navy hover:underline dark:text-amber-300">
                 Subscribe on YouTube
               </a>{' '}
               to be notified.
@@ -76,7 +76,7 @@ export default function LivePage() {
               <Link
                 key={sermon.slug}
                 href={`/sermons/${sermon.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-0.5 hover:shadow-calm"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-0.5 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800"
               >
                 <div className="relative aspect-video w-full overflow-hidden bg-navy">
                   {sermon.posterImage ? (
@@ -94,12 +94,12 @@ export default function LivePage() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
                     {formatDate(sermon.date)}
                   </p>
-                  <h3 className="mt-2 text-base font-semibold text-foreground line-clamp-2">{sermon.title}</h3>
-                  <p className="mt-1 text-sm text-text-soft">{sermon.passage}</p>
-                  <span className="mt-4 text-sm font-semibold text-navy group-hover:underline">
+                  <h3 className="mt-2 text-base font-semibold text-foreground line-clamp-2 dark:text-slate-100">{sermon.title}</h3>
+                  <p className="mt-1 text-sm text-text-soft dark:text-slate-400">{sermon.passage}</p>
+                  <span className="mt-4 text-sm font-semibold text-navy group-hover:underline dark:text-amber-300">
                     Read message notes →
                   </span>
                 </div>

@@ -51,41 +51,41 @@ export default function WelcomePage() {
         />
       </Section>
 
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">First time here?</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">What to expect</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
-              A Sunday service at Acts 242 is warm, simple, and centered on God's Word. Expect worship, prayer, the Lord's Supper, and a Bible-centered message. Come as you are.
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">First time here?</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">What to expect</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
+              A Sunday service at Acts 242 is warm, simple, and centered on God&apos;s Word. Expect worship, prayer, the Lord&apos;s Supper, and a Bible-centered message. Come as you are.
             </p>
             <div className="mt-6 space-y-2 text-sm">
               {siteConfig.serviceHours.map((s) => (
                 <p key={s.day}>
-                  <span className="font-semibold text-foreground">{s.day}</span>{' '}
-                  <span className="text-text-soft">{s.time}</span>
-                  <span className="ml-2 text-xs text-text-soft">— {s.description}</span>
+                  <span className="font-semibold text-foreground dark:text-slate-200">{s.day}</span>{' '}
+                  <span className="text-text-soft dark:text-slate-400">{s.time}</span>
+                  <span className="ml-2 text-xs text-text-soft dark:text-slate-400">— {s.description}</span>
                 </p>
               ))}
-              <p className="pt-1 text-xs text-text-soft">{siteConfig.address}</p>
+              <p className="pt-1 text-xs text-text-soft dark:text-slate-400">{siteConfig.address}</p>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Want to study?</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">One-on-one Bible study</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
-              We offer personal Bible study for anyone wanting to grow in God's Word. Reach out and we'll match you with someone from our team.
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Want to study?</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">One-on-one Bible study</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
+              We offer personal Bible study for anyone wanting to grow in God&apos;s Word. Reach out and we&apos;ll match you with someone from our team.
             </p>
             <ButtonLink href="/discipleship" variant="ghost" className="mt-6 px-0">
               Start the foundation lessons
             </ButtonLink>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Looking for prayer?</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground">We would love to pray</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft">
+          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Looking for prayer?</p>
+            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">We would love to pray</h2>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
               Share a prayer request and our pastoral team will lift it up with you — personally and confidentially.
             </p>
             <ButtonLink href="/prayer-request" variant="ghost" className="mt-6 px-0">
@@ -102,23 +102,23 @@ export default function WelcomePage() {
               reference="Matthew 18:20"
               text="For where two or three gather in my name, there am I with them."
             />
-            <div className="rounded-3xl border border-border bg-white p-6">
-              <p className="text-sm font-semibold text-foreground">2026 Theme</p>
-              <p className="mt-2 text-xl font-bold tracking-tight text-navy">{siteConfig.yearTheme}</p>
-              <p className="mt-2 text-sm text-text-soft">
+            <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-sm font-semibold text-foreground dark:text-slate-200">2026 Theme</p>
+              <p className="mt-2 text-xl font-bold tracking-tight text-navy dark:text-amber-300">{siteConfig.yearTheme}</p>
+              <p className="mt-2 text-sm text-text-soft dark:text-slate-400">
                 This year at Acts 242, everything we study, preach, and build is centered on Jesus — who He is, what He did, and what it means to follow Him.
               </p>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Let us know you were here</p>
-            <p className="mt-2 text-base text-text-soft">Fill this out and someone from our team will follow up with you.</p>
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Let us know you were here</p>
+            <p className="mt-2 text-base text-text-soft dark:text-slate-400">Fill this out and someone from our team will follow up with you.</p>
 
             {status === 'success' ? (
               <div className="mt-6 space-y-3 text-center">
-                <p className="text-xl font-bold tracking-tight text-foreground">Welcome to Acts 242.</p>
-                <p className="text-sm leading-7 text-text-soft">We received your details and will be in touch soon. We're glad you're here.</p>
+                <p className="text-xl font-bold tracking-tight text-foreground dark:text-slate-100">Welcome to Acts 242.</p>
+                <p className="text-sm leading-7 text-text-soft dark:text-slate-400">We received your details and will be in touch soon. We&apos;re glad you&apos;re here.</p>
                 <ButtonLink href="/discipleship" variant="secondary" className="mt-2">Start the lessons</ButtonLink>
               </div>
             ) : (
@@ -157,7 +157,7 @@ export default function WelcomePage() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft disabled:opacity-60 dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200"
                 >
                   {status === 'submitting' ? 'Sending...' : 'Submit'}
                 </button>

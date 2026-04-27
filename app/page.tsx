@@ -9,6 +9,7 @@ import { siteConfig } from '@/data/site'
 import { SocialLinks } from '@/components/sections/social-links'
 import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { StatsRow } from '@/components/sections/stats-row'
+import { UpcomingEvents } from '@/components/sections/upcoming-events'
 
 export default function HomePage() {
   const featuredMaterials = materials.filter((item) => item.featured)
@@ -65,7 +66,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats strip */}
-      <section className="border-b border-border bg-white">
+      <section className="border-b border-border bg-white dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
           <StatsRow />
         </div>
@@ -88,26 +89,26 @@ export default function HomePage() {
       </section>
 
       {/* Two paths welcome */}
-      <Section>
+      <Section className="dark:bg-slate-950">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">A warm welcome</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">A warm welcome</p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
             Wherever you are, there is a next step
           </h2>
-          <p className="mt-4 text-base leading-8 text-text-soft">
+          <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
             Acts 242 exists to help people know the Lord, be grounded in Scripture, and continue in faithful discipleship.
           </p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm">
-            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-amber-100 transition group-hover:scale-110" />
+          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/40">
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-amber-100 transition group-hover:scale-110 dark:bg-amber-300/10" />
             <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl dark:bg-amber-300/20">
                 ✦
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-foreground">New to faith?</h3>
-              <p className="mt-3 text-base leading-7 text-text-soft">
+              <h3 className="mt-6 text-2xl font-bold text-foreground dark:text-slate-100">New to faith?</h3>
+              <p className="mt-3 text-base leading-7 text-text-soft dark:text-slate-400">
                 Start with the foundation lessons — written for anyone exploring the Christian life from the very beginning.
               </p>
               <ButtonLink href="/welcome" variant="ghost" className="mt-6 px-0">
@@ -116,14 +117,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm">
-            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-navy/10 transition group-hover:scale-110" />
+          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/40">
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-navy/10 transition group-hover:scale-110 dark:bg-amber-300/5" />
             <div className="relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-navy/10 text-2xl">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-navy/10 text-2xl dark:bg-amber-300/15 dark:text-amber-300">
                 ✛
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-foreground">Already following Christ?</h3>
-              <p className="mt-3 text-base leading-7 text-text-soft">
+              <h3 className="mt-6 text-2xl font-bold text-foreground dark:text-slate-100">Already following Christ?</h3>
+              <p className="mt-3 text-base leading-7 text-text-soft dark:text-slate-400">
                 Connect with us, explore the materials, or reach out to a pastor to keep growing in the faith.
               </p>
               <ButtonLink href="/connect" variant="ghost" className="mt-6 px-0">
@@ -135,14 +136,14 @@ export default function HomePage() {
       </Section>
 
       {/* Discipleship lessons — light bg */}
-      <Section className="bg-muted">
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Discipleship</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Discipleship</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
               Seven foundation lessons
             </h2>
-            <p className="mt-3 text-base leading-7 text-text-soft">
+            <p className="mt-3 text-base leading-7 text-text-soft dark:text-slate-400">
               A clear path through the essentials of the Christian life — for new believers and for any disciple wanting to revisit the basics.
             </p>
           </div>
@@ -207,15 +208,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Upcoming Events */}
+      <UpcomingEvents />
+
       {/* Materials */}
-      <Section>
+      <Section className="bg-muted dark:bg-slate-900">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Materials</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Materials</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
               Resources for discipleship and evangelism
             </h2>
-            <p className="mt-3 text-base leading-7 text-text-soft">
+            <p className="mt-3 text-base leading-7 text-text-soft dark:text-slate-400">
               Foundation guide, sermon slides, brochures, and printable evangelism materials — all freely available.
             </p>
           </div>
@@ -232,65 +236,65 @@ export default function HomePage() {
       </Section>
 
       {/* Connect / visit */}
-      <Section className="bg-muted">
+      <Section className="dark:bg-slate-950">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy">Connect</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Connect</p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
             Take your next step
           </h2>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-lg">
+          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-300/20">
               ✉
             </div>
-            <h3 className="mt-5 text-lg font-semibold text-foreground">Email the church</h3>
-            <p className="mt-3 text-sm leading-7 text-text-soft">Reach out with a question, prayer request, or your desire to know more.</p>
-            <a href={`mailto:${siteConfig.email}`} className="mt-4 inline-flex text-sm font-semibold text-navy hover:underline">
+            <h3 className="mt-5 text-lg font-semibold text-foreground dark:text-slate-100">Email the church</h3>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">Reach out with a question, prayer request, or your desire to know more.</p>
+            <a href={`mailto:${siteConfig.email}`} className="mt-4 inline-flex text-sm font-semibold text-navy hover:underline dark:text-amber-300">
               {siteConfig.email}
             </a>
           </div>
-          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy/10 text-lg">
+          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy/10 text-lg dark:bg-amber-300/15 dark:text-amber-300">
               ✛
             </div>
-            <h3 className="mt-5 text-lg font-semibold text-foreground">Talk to a pastor</h3>
-            <p className="mt-3 text-sm leading-7 text-text-soft">Want guidance, prayer, or pastoral help? We would be glad to connect with you.</p>
+            <h3 className="mt-5 text-lg font-semibold text-foreground dark:text-slate-100">Talk to a pastor</h3>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">Want guidance, prayer, or pastoral help? We would be glad to connect with you.</p>
             <ButtonLink href="/connect" variant="ghost" className="mt-4 px-0 py-0">
               Go to connect page →
             </ButtonLink>
           </div>
-          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-lg">
+          <div className="rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-300/20">
               ✦
             </div>
-            <h3 className="mt-5 text-lg font-semibold text-foreground">I am ready to know more</h3>
-            <p className="mt-3 text-sm leading-7 text-text-soft">Ready to begin discipleship or take your next step? Start here.</p>
+            <h3 className="mt-5 text-lg font-semibold text-foreground dark:text-slate-100">I am ready to know more</h3>
+            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">Ready to begin discipleship or take your next step? Start here.</p>
             <ButtonLink href="/welcome" variant="ghost" className="mt-4 px-0 py-0">
               Start here →
             </ButtonLink>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-border bg-white px-6 py-5">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-border bg-white px-6 py-5 dark:border-slate-700 dark:bg-slate-800">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Join us in person</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Join us in person</p>
             <div className="mt-2 flex flex-wrap gap-6">
               {siteConfig.serviceHours.map((s) => (
-                <span key={s.day} className="text-sm text-foreground">
+                <span key={s.day} className="text-sm text-foreground dark:text-slate-200">
                   <span className="font-semibold">{s.day}</span>{' '}
-                  <span className="text-text-soft">{s.time}</span>
+                  <span className="text-text-soft dark:text-slate-400">{s.time}</span>
                 </span>
               ))}
             </div>
-            <p className="mt-1 text-xs text-text-soft">{siteConfig.address}</p>
+            <p className="mt-1 text-xs text-text-soft dark:text-slate-400">{siteConfig.address}</p>
           </div>
           <Link
             href={siteConfig.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-semibold text-navy hover:underline"
+            className="text-sm font-semibold text-navy hover:underline dark:text-amber-300"
           >
             Get directions →
           </Link>

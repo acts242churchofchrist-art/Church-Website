@@ -25,14 +25,14 @@ export function LeaderAvatar({ name, photo, size = 'md' }: LeaderAvatarProps) {
       <img
         src={photo}
         alt={name}
-        className={`${sizeClasses[size]} rounded-full object-cover border-2 border-border`}
+        className={`${sizeClasses[size]} rounded-full object-cover border-2 border-border dark:border-slate-700`}
       />
     )
   }
 
   return (
     <div
-      className={`${sizeClasses[size]} rounded-full bg-navy flex items-center justify-center font-bold text-white border-2 border-border shrink-0`}
+      className={`${sizeClasses[size]} rounded-full bg-navy flex items-center justify-center font-bold text-white border-2 border-border shrink-0 dark:border-slate-700`}
       aria-label={`${name} — photo coming soon`}
     >
       {initials}

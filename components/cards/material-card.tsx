@@ -6,9 +6,9 @@ export function MaterialCard({ item }: { item: MaterialItem }) {
   const isPdf = item.href.endsWith('.pdf')
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:shadow-calm">
+    <article className="flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:shadow-calm dark:border-slate-700 dark:bg-slate-800">
       {item.thumbnail && (
-        <div className="overflow-hidden border-b border-border">
+        <div className="overflow-hidden border-b border-border dark:border-slate-700">
           <img
             src={item.thumbnail}
             alt={item.title}
@@ -18,13 +18,13 @@ export function MaterialCard({ item }: { item: MaterialItem }) {
       )}
       <div className="flex flex-1 flex-col p-6">
         <Tag>{item.category}</Tag>
-        <h3 className="mt-4 text-xl font-semibold text-foreground">{item.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-7 text-text-soft">{item.description}</p>
+        <h3 className="mt-4 text-xl font-semibold text-foreground dark:text-slate-100">{item.title}</h3>
+        <p className="mt-3 flex-1 text-sm leading-7 text-text-soft dark:text-slate-400">{item.description}</p>
         <Link
           href={item.href}
           target={isPdf ? '_blank' : undefined}
           rel={isPdf ? 'noopener noreferrer' : undefined}
-          className="mt-6 inline-flex text-sm font-semibold text-navy hover:underline"
+          className="mt-6 inline-flex text-sm font-semibold text-navy hover:underline dark:text-amber-300"
         >
           {item.actionLabel}
         </Link>

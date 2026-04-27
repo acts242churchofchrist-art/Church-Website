@@ -6,6 +6,10 @@
   color-scheme: light;
 }
 
+.dark {
+  color-scheme: dark;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -13,6 +17,37 @@ html {
 body {
   background: #ffffff;
   color: #0f172a;
+}
+
+.dark body {
+  background: #020617;
+  color: #f1f5f9;
+}
+
+/* Sermon prose dark variants */
+.dark .sermon-prose h2 {
+  color: #f1f5f9;
+}
+
+.dark .sermon-prose p {
+  color: #cbd5e1;
+}
+
+.dark .sermon-prose blockquote {
+  border-left-color: #fcd34d;
+  color: #cbd5e1;
+}
+
+.dark .sermon-prose ul li {
+  color: #cbd5e1;
+}
+
+.dark .sermon-prose strong {
+  color: #f1f5f9;
+}
+
+.dark .sermon-prose hr {
+  border-color: #334155;
 }
 
 * {

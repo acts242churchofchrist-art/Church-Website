@@ -20,9 +20,9 @@ export function ButtonLink({
       onClick={onClick}
       className={cn(
         'inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold transition',
-        variant === 'primary' && 'bg-navy text-white hover:bg-navy-soft',
-        variant === 'secondary' && 'border border-border bg-white text-navy hover:bg-muted',
-        variant === 'ghost' && 'text-navy underline-offset-4 hover:underline',
+        variant === 'primary' && 'bg-navy text-white hover:bg-navy-soft dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200',
+        variant === 'secondary' && 'border border-border bg-white text-navy hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+        variant === 'ghost' && 'text-navy underline-offset-4 hover:underline dark:text-amber-300',
         className,
       )}
     >
