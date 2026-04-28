@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
+import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { getAllSermons } from '@/lib/sermons'
 import { sermonArchive } from '@/data/sermon-archive'
 import { siteConfig } from '@/data/site'
@@ -70,17 +71,34 @@ export default function SermonsPage() {
 
   return (
     <>
-      <Section>
-        <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Sermons</p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl dark:text-slate-100">
-            Biblical teaching for every season
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-text-soft dark:text-slate-400">
-            Preaching from Acts 242 Church of Christ. Every message is grounded in Scripture and aimed at helping people follow Jesus more faithfully.
-          </p>
+      <ThisSundayBanner />
+
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">2026 — All About Jesus</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              Teaching from<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">Acts 242.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              Browse weekly sermon outlines, brochures, and recordings. Every message is available to read, watch, and download.
+            </p>
+            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+              <Link href="/live" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Watch this Sunday
+              </Link>
+              <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Subscribe on YouTube
+              </a>
+            </div>
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* ── 2026 Current Year ── */}
       <Section className="bg-muted dark:bg-slate-900">
@@ -133,7 +151,7 @@ export default function SermonsPage() {
           {sermonArchive.map((year) => (
             <div
               key={year.year}
-              className="flex flex-col justify-between gap-4 rounded-3xl border border-border bg-muted p-6 sm:flex-row sm:items-center dark:border-slate-700 dark:bg-slate-900"
+              className="flex flex-col justify-between gap-4 rounded-3xl border border-border border-l-4 border-l-navy/30 bg-muted p-6 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm sm:flex-row sm:items-center dark:border-slate-700 dark:bg-slate-900 dark:border-l-amber-300/40 dark:hover:border-amber-300/40"
             >
               <div>
                 <p className="text-lg font-semibold text-foreground dark:text-slate-100">{year.label}</p>

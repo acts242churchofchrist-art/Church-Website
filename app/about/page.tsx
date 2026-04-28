@@ -1,9 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import Image from 'next/image'
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Section } from '@/components/layout/section'
-import { PageHero } from '@/components/sections/page-hero'
 import { VerseBlock } from '@/components/sections/verse-block'
 import { ButtonLink } from '@/components/ui/button-link'
 import { LeaderAvatar } from '@/components/ui/leader-avatar'
@@ -39,14 +39,31 @@ export default function AboutPage() {
   return (
     <>
       {/* ── 1. Hero ── */}
-      <Section>
-        <PageHero
-          eyebrow="About"
-          title="Who Acts 242 is"
-          description="Acts 242 Church of Christ is a community devoted to God's Word, prayer, fellowship, and the faithful making of disciples — named after the pattern found in Acts 2:42."
-          actions={<ButtonLink href="/connect">Connect with us</ButtonLink>}
-        />
-      </Section>
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Acts 242 Church of Christ</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              Who we are.<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">A church for the next generation.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              Acts 242 Church of Christ is a community in Parañaque devoted to God&apos;s Word, prayer, fellowship, and the faithful making of disciples — named after the pattern found in Acts 2:42.
+            </p>
+            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+              <a href="#story" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Our story →
+              </a>
+              <Link href="/connect" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Connect with us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── 2. Why the Name ── */}
       <Section className="bg-muted dark:bg-slate-900">
@@ -66,7 +83,10 @@ export default function AboutPage() {
 
       {/* ── 3. Mission and Vision ── */}
       <Section>
-        <div className="grid gap-6 md:grid-cols-2">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Our Mission</p>
+        <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">What we believe and where we&apos;re going</h2>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {missionVision.mission.label}
@@ -75,7 +95,7 @@ export default function AboutPage() {
               {missionVision.mission.text}
             </p>
           </div>
-          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+          <div className="rounded-3xl border border-border bg-muted p-8 dark:border-slate-700 dark:bg-slate-900">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {missionVision.vision.label}
             </p>
@@ -87,8 +107,11 @@ export default function AboutPage() {
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {missionVision.values.map((value) => (
-            <div key={value.title} className="rounded-3xl border border-border bg-muted p-6 dark:border-slate-700 dark:bg-slate-900">
-              <h3 className="text-base font-semibold text-foreground dark:text-slate-100">{value.title}</h3>
+            <div key={value.title} className="group rounded-3xl border border-border border-l-4 border-l-navy bg-white p-6 transition hover:-translate-y-1 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:border-l-amber-300">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-navy dark:bg-amber-300" />
+                <h3 className="text-base font-semibold text-foreground dark:text-slate-100">{value.title}</h3>
+              </div>
               <p className="mt-2 text-sm leading-7 text-text-soft dark:text-slate-400">{value.description}</p>
             </div>
           ))}
@@ -96,7 +119,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ── 4. Our Story ── */}
-      <Section className="bg-muted dark:bg-slate-900">
+      <Section id="story" className="bg-muted dark:bg-slate-900">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Our Story</p>
@@ -143,7 +166,7 @@ export default function AboutPage() {
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Pastor</p>
         <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Meet the pastor</h2>
 
-        <div className="mt-8 rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
+        <div className="mt-8 rounded-3xl border border-border border-l-4 border-l-navy bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800 dark:border-l-amber-300">
           <div className="flex flex-col gap-8 md:flex-row md:items-start">
             <div className="flex flex-col items-center gap-2 md:items-start">
               <DevNote label="Pastor photo pending — add to /public/images/leadership/bro-marc.jpg" />
@@ -178,15 +201,18 @@ export default function AboutPage() {
           {coreLeadership.map((leader) => (
             <div
               key={leader.name}
-              className="flex flex-col items-center rounded-3xl border border-border bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-800"
+              className="group relative flex flex-col items-center overflow-hidden rounded-3xl border border-border border-t-4 border-t-navy bg-white p-8 text-center transition hover:-translate-y-1 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:border-t-amber-300"
             >
-              <DevNote label="Leadership photos pending" />
-              <LeaderAvatar name={leader.name} photo={leader.photo} size="md" />
-              <h3 className="mt-4 text-lg font-semibold text-foreground dark:text-slate-100">{leader.name}</h3>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
-                {leader.title}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-text-soft dark:text-slate-400">{leader.ministry}</p>
+              <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-navy/5 transition group-hover:bg-navy/10 dark:bg-amber-300/5" />
+              <div className="relative flex flex-col items-center">
+                <DevNote label="Leadership photos pending" />
+                <LeaderAvatar name={leader.name} photo={leader.photo} size="md" />
+                <h3 className="mt-4 text-lg font-semibold text-foreground dark:text-slate-100">{leader.name}</h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+                  {leader.title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-text-soft dark:text-slate-400">{leader.ministry}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -203,7 +229,7 @@ export default function AboutPage() {
           {extendedTeam.map((member) => (
             <div
               key={member.name}
-              className="flex items-center gap-4 rounded-2xl border border-border bg-muted p-4 dark:border-slate-700 dark:bg-slate-900"
+              className="flex items-center gap-4 rounded-2xl border border-border border-l-4 border-l-navy/30 bg-muted p-4 transition hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-900 dark:border-l-amber-300/30 dark:hover:border-amber-300/40"
             >
               <LeaderAvatar name={member.name} photo={member.photo} size="sm" />
               <div>

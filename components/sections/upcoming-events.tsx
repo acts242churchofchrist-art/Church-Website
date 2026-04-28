@@ -1,10 +1,24 @@
-import { recurringEvents, datedEvents, eventTypeColors, eventTypeLabels, type ChurchEvent } from '@/data/events'
+import {
+  recurringEvents,
+  datedEvents,
+  upcomingPreachingSchedule,
+  eventTypeColors,
+  eventTypeLabels,
+  type ChurchEvent,
+} from '@/data/events'
 import { Section } from '@/components/layout/section'
 
 function formatEventDate(dateStr: string) {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
+    day: 'numeric',
+  })
+}
+
+function formatShortDate(dateStr: string) {
+  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
+    month: 'short',
     day: 'numeric',
   })
 }
@@ -53,7 +67,12 @@ function DatedEventCard({ event }: { event: ChurchEvent }) {
         </p>
         <EventTypeBadge type={event.type} />
       </div>
-      <h3 className="mt-3 text-lg font-semibold text-foreground dark:text-slate-100">
+      {event.ministry && (
+        <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-navy/60 dark:text-amber-300/60">
+          {event.ministry}
+        </p>
+      )}
+      <h3 className={`${event.ministry ? 'mt-1' : 'mt-3'} text-lg font-semibold text-foreground dark:text-slate-100`}>
         {event.title}
       </h3>
       {event.description && (
@@ -91,12 +110,41 @@ export function UpcomingEvents() {
         </p>
       </div>
 
-      {/* Recurring events */}
-      {recurringEvents.length > 0 && (
+      {/* Recurring events — Sunday service only */}
+      {recurringEvents.filter((e) => e.id === 'sunday-service-weekly').length > 0 && (
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {recurringEvents.map((event) => (
-            <RecurringEventCard key={event.id} event={event} />
-          ))}
+          {recurringEvents
+            .filter((e) => e.id === 'sunday-service-weekly')
+            .map((event) => (
+              <RecurringEventCard key={event.id} event={event} />
+            ))}
+        </div>
+      )}
+
+      {/* Preaching schedule */}
+      {upcomingPreachingSchedule.length > 0 && (
+        <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted dark:border-slate-700 dark:bg-slate-900">
+          <div className="border-b border-border px-5 py-3 dark:border-slate-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+              May Preaching Schedule
+            </p>
+          </div>
+          <div className="divide-y divide-border dark:divide-slate-700">
+            {upcomingPreachingSchedule.map((entry) => (
+              <div key={entry.date} className="flex items-center gap-4 px-5 py-3">
+                <span className="w-14 shrink-0 text-sm font-semibold text-foreground dark:text-slate-200">
+                  {formatShortDate(entry.date)}
+                </span>
+                <span className="w-px self-stretch bg-border dark:bg-slate-700" aria-hidden />
+                <span className="w-28 shrink-0 text-sm font-medium text-foreground dark:text-slate-100">
+                  {entry.preacher}
+                </span>
+                {entry.note && (
+                  <span className="text-sm text-text-soft dark:text-slate-400">{entry.note}</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

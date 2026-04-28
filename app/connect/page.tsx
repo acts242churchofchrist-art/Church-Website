@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Section } from '@/components/layout/section'
-import { PageHero } from '@/components/sections/page-hero'
 import { SocialLinks } from '@/components/sections/social-links'
 import { ButtonLink } from '@/components/ui/button-link'
 import { FormLabel, FormInput, FormTextarea, FormCheckbox } from '@/components/ui/form-field'
@@ -37,48 +37,76 @@ export default function ConnectPage() {
 
   return (
     <>
-      <Section>
-        <PageHero
-          eyebrow="Connect"
-          title="Take your next step"
-          description="If you have a question, want to talk to a pastor, or are ready to begin discipleship, we would be glad to hear from you."
-        />
-      </Section>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Connect</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              Take your<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">next step.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              If you have a question, want to talk to a pastor, or are ready to begin discipleship — we would be glad to hear from you.
+            </p>
+            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+              <a href="#form" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Fill out a form →
+              </a>
+              <a href={siteConfig.messengerUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Message on Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Contact entry cards */}
       <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">New here</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">First time or exploring faith</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
-              If you are visiting for the first time or curious about Christianity, fill out a short welcome form. We would love to know you and follow up personally.
-            </p>
-            <ButtonLink href="/welcome" variant="ghost" className="mt-6 px-0">
-              Fill out a welcome form
-            </ButtonLink>
+          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/40">
+            <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-navy/5 transition group-hover:bg-navy/10 dark:bg-amber-300/5" />
+            <div className="relative">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">New here</p>
+              <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">First time or exploring faith</h2>
+              <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
+                If you are visiting for the first time or curious about Christianity, fill out a short welcome form. We would love to know you and follow up personally.
+              </p>
+              <a href="/welcome" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:gap-2 dark:text-amber-300">
+                Fill out a welcome form <span aria-hidden>→</span>
+              </a>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Prayer and counsel</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Prayer request</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
-              Share a prayer request with our pastoral team. We will pray for you personally and follow up if you'd like.
-            </p>
-            <ButtonLink href="/prayer-request" variant="ghost" className="mt-6 px-0">
-              Submit a prayer request
-            </ButtonLink>
+          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/40">
+            <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-navy/5 transition group-hover:bg-navy/10 dark:bg-amber-300/5" />
+            <div className="relative">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Prayer and counsel</p>
+              <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Prayer request</h2>
+              <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
+                Share a prayer request with our pastoral team. We will pray for you personally and follow up if you&apos;d like.
+              </p>
+              <a href="/prayer-request" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:gap-2 dark:text-amber-300">
+                Submit a prayer request <span aria-hidden>→</span>
+              </a>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Next step</p>
-            <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Ready for baptism or discipleship</h2>
-            <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
-              If you have gone through the lessons and are ready for water baptism, or want to begin one-on-one discipleship, let us know below.
-            </p>
-            <ButtonLink href="/discipleship/water-baptism" variant="ghost" className="mt-6 px-0">
-              Learn about baptism
-            </ButtonLink>
+          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-6 transition hover:-translate-y-1 hover:border-navy/30 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/40">
+            <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-navy/5 transition group-hover:bg-navy/10 dark:bg-amber-300/5" />
+            <div className="relative">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Next step</p>
+              <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">Ready for baptism or discipleship</h2>
+              <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
+                If you have gone through the lessons and are ready for water baptism, or want to begin one-on-one discipleship, let us know below.
+              </p>
+              <a href="/discipleship/water-baptism" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:gap-2 dark:text-amber-300">
+                Learn about baptism <span aria-hidden>→</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -88,7 +116,7 @@ export default function ConnectPage() {
       </Section>
 
       {/* Talk to a pastor form */}
-      <Section>
+      <Section id="form">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="space-y-6">
             <div>
@@ -172,7 +200,7 @@ export default function ConnectPage() {
       {/* Service times + location */}
       <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+          <div className="rounded-3xl border border-border border-t-4 border-t-navy bg-white p-8 dark:border-slate-700 dark:bg-slate-800 dark:border-t-amber-300">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Service schedule</p>
             <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">Join us in person</h2>
             <div className="mt-6 space-y-4">
@@ -188,7 +216,7 @@ export default function ConnectPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+          <div className="rounded-3xl border border-border border-t-4 border-t-amber-500 bg-white p-8 dark:border-slate-700 dark:bg-slate-800 dark:border-t-amber-300">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Find us</p>
             <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">{siteConfig.fullChurchName}</h2>
             <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">{siteConfig.address}</p>

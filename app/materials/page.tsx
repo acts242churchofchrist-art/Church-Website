@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Section } from '@/components/layout/section'
-import { PageHero } from '@/components/sections/page-hero'
 import { MaterialCard } from '@/components/cards/material-card'
 import { MaterialHeroCard } from '@/components/cards/material-hero-card'
 import { materials } from '@/data/materials'
@@ -22,13 +22,31 @@ export default function MaterialsPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <Section>
-        <PageHero
-          eyebrow="Materials"
-          title="Church resources and study materials"
-          description="Download and share these resources freely — for personal study, evangelism conversations, and discipleship. All materials are prepared by Acts 242 Church of Christ."
-        />
-      </Section>
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Resources</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              Study, share,<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">and grow in the Word.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              Download and share these resources freely — for personal study, evangelism conversations, and discipleship. All materials are prepared by Acts 242 Church of Christ.
+            </p>
+            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+              <Link href="/foundation-guide.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Open Foundation Guide →
+              </Link>
+              <Link href="/sermons" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Browse sermons
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── Foundation Guide — Featured Hero ── */}
       {foundationGuide && (

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Section } from '@/components/layout/section'
-import { PageHero } from '@/components/sections/page-hero'
+import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { ButtonLink } from '@/components/ui/button-link'
 import { CurrentWeekMaterialsCard } from '@/components/sections/current-week-materials'
 import { getRecentSermons } from '@/lib/sermons'
@@ -20,22 +20,34 @@ export default function LivePage() {
 
   return (
     <>
-      <Section>
-        <PageHero
-          eyebrow="Live"
-          title="Watch live preaching"
-          description="Join the church online through live preaching, then continue with recent messages and teaching on YouTube."
-          actions={
-            <>
-              <ButtonLink href={siteConfig.youtubeUrl}>Visit YouTube</ButtonLink>
-              <ButtonLink href="/sermons" variant="secondary">Sermon archive</ButtonLink>
-              <ButtonLink href="/connect" variant="ghost">
-                Connect with us
-              </ButtonLink>
-            </>
-          }
-        />
-      </Section>
+      <ThisSundayBanner />
+
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Live Preaching</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              Watch us<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">live every Sunday.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              We go live every Sunday at 10:00 AM and every Friday at 5:30 PM. Subscribe on YouTube to be notified when we go live.
+            </p>
+            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+              <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Subscribe on YouTube
+              </a>
+              <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Follow on Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Section className="bg-muted dark:bg-slate-900">
         <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">

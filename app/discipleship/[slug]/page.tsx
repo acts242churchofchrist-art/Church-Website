@@ -88,17 +88,17 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
         </div>
       </Section>
 
-      {/* 5. Study content — explanation, passages, understand, reflection, challenge */}
+      {/* 5a. Explanation + Passages */}
       <Section>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="space-y-6">
             <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-              <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Short explanation</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Explanation</p>
               <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.explanation}</p>
             </div>
 
             <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-              <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Passage blocks</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Key Passages</p>
               <div className="mt-6 space-y-6">
                 {lesson.passages.map((passage) => (
                   <div key={passage.reference} className="rounded-2xl bg-muted p-5 dark:bg-slate-900">
@@ -110,42 +110,43 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             </div>
           </div>
 
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-              <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Understand</h2>
-              <div className="mt-6 space-y-5">
-                {lesson.understand.map((item) => (
-                  <div key={item.label}>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">{item.label}</p>
-                    <p className="mt-2 text-base leading-8 text-text-soft dark:text-slate-400">{item.content}</p>
-                  </div>
-                ))}
+          {/* Understand — each item as a white card with navy left border */}
+          <div className="space-y-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Understand</p>
+            {lesson.understand.map((item) => (
+              <div key={item.label} className="rounded-3xl border border-border border-l-4 border-l-navy bg-white p-6 dark:border-slate-700 dark:bg-slate-800 dark:border-l-amber-300">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">{item.label}</p>
+                <p className="mt-2 text-base leading-8 text-text-soft dark:text-slate-400">{item.content}</p>
               </div>
-            </div>
-
-            <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-              <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Reflection</h2>
-              <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.reflection}</p>
-            </div>
-
-            <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-              <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Challenge</h2>
-              <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.challenge}</p>
-            </div>
+            ))}
           </div>
         </div>
       </Section>
 
-      {/* 6. Prayer — full width, given its own space */}
+      {/* 5b. Reflection + Challenge — two-column */}
       <Section className="bg-muted dark:bg-slate-900">
-        <div className="max-w-3xl rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
-          <h2 className="text-2xl font-semibold text-foreground dark:text-slate-100">Prayer</h2>
-          <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.prayer}</p>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Reflection</p>
+            <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.reflection}</p>
+          </div>
+          <div className="rounded-3xl border border-border bg-white p-8 dark:border-slate-700 dark:bg-slate-800">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Challenge</p>
+            <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">{lesson.challenge}</p>
+          </div>
+        </div>
+      </Section>
+
+      {/* 6. Prayer — centered, italic/devotional style */}
+      <Section>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Prayer</p>
+          <p className="mt-6 text-lg italic leading-9 text-text-soft dark:text-slate-400">&ldquo;{lesson.prayer}&rdquo;</p>
         </div>
       </Section>
 
       {/* 7. Next step CTA */}
-      <Section>
+      <Section className="bg-muted dark:bg-slate-900">
         <CtaBand
           title={isLastLesson ? 'You have completed all seven lessons' : lesson.nextStepLabel}
           description={

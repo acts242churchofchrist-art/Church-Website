@@ -1,11 +1,11 @@
 export const missionVision = {
   mission: {
     label: 'Our Mission',
-    text: "To make disciples of the next generation — grounding young people and families in God's Word, prayer, and fellowship so they grow into faithful followers of Jesus Christ.",
+    text: "To make disciples of Jesus Christ, one soul at a time, leading people into a deeper knowledge of God's love and sovereignty, and guiding them toward maturity in faith through His Word.",
   },
   vision: {
     label: 'Our Vision',
-    text: 'To be a church in Parañaque that the next generation calls home — a place where people encounter God, grow in His Word, and find their lives transformed by the love and truth of Jesus Christ.',
+    text: "A Christ-centered family where people experience God's love, trust in His sovereignty, and find refuge, hope, and spiritual growth in a troubled world.",
   },
   values: [
     {

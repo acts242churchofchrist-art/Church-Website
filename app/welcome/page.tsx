@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Section } from '@/components/layout/section'
-import { PageHero } from '@/components/sections/page-hero'
 import { VerseBlock } from '@/components/sections/verse-block'
 import { ButtonLink } from '@/components/ui/button-link'
 import { FormLabel, FormInput, FormCheckbox } from '@/components/ui/form-field'
@@ -37,19 +37,24 @@ export default function WelcomePage() {
 
   return (
     <>
-      <Section>
-        <PageHero
-          eyebrow="Welcome"
-          title="We're glad you're here"
-          description="If today is your first time with Acts 242, we would love to know you, answer your questions, and walk with you into your next step."
-          actions={
-            <>
-              <ButtonLink href="/discipleship">Start foundation lessons</ButtonLink>
-              <ButtonLink href="/connect" variant="secondary">Reach out to us</ButtonLink>
-            </>
-          }
-        />
-      </Section>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-soft to-navy text-white">
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+          <div className="max-w-3xl">
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Welcome</p>
+            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              We are glad<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">you are here.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+              If today is your first time with Acts 242, we would love to know you, answer your questions, and walk with you into the next step.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-6 md:grid-cols-3">
