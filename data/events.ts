@@ -119,7 +119,7 @@ export type PreacherEntry = {
 }
 
 export const preachingSchedule: PreacherEntry[] = [
-  { date: '2026-05-10', preacher: 'Bro. Tony', note: 'With testimony by Bro. Mike' },
+  { date: '2026-05-10', preacher: 'Bro. Tony', note: 'With testimony by Bro. James' },
   { date: '2026-05-17', preacher: 'Bro. Marc', note: 'Sunday Service' },
   { date: '2026-05-22', preacher: 'Bro. Vince', note: 'Midweek Devotional' },
   { date: '2026-05-24', preacher: 'Bro. Kiev', note: 'Sunday Service' },
