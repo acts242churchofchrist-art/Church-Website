@@ -51,6 +51,11 @@ function facebookEmbedUrl(url: string): string {
   return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560&height=315&appId`
 }
 
+function driveEmbedUrl(url: string): string {
+  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/)
+  return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url
+}
+
 export default async function SermonPage({ params }: Props) {
   const { slug } = await params
   const sermon = getSermonBySlug(slug)
@@ -63,7 +68,7 @@ export default async function SermonPage({ params }: Props) {
   })
 
   const hasPoster = Boolean(sermon.posterImage)
-  const hasVideo = Boolean(sermon.youtubeUrl || sermon.facebookUrl)
+  const hasVideo = Boolean(sermon.youtubeUrl || sermon.facebookUrl || sermon.driveUrl)
   const hasBrochure = Boolean(sermon.brochureImages?.front || sermon.brochureImages?.inside)
 
   const jsonLd = {
@@ -138,6 +143,16 @@ export default async function SermonPage({ params }: Props) {
               src={youtubeEmbedUrl(sermon.youtubeUrl)}
               title={sermon.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        ) : sermon.driveUrl ? (
+          <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">
+            <iframe
+              className="aspect-video w-full"
+              src={driveEmbedUrl(sermon.driveUrl)}
+              title={sermon.title}
+              allow="autoplay"
               allowFullScreen
             />
           </div>
@@ -252,6 +267,16 @@ export default async function SermonPage({ params }: Props) {
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Watch on YouTube ↗
+                </a>
+              )}
+              {sermon.driveUrl && (
+                <a
+                  href={sermon.driveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
+                >
+                  Watch Recording ↗
                 </a>
               )}
               {sermon.facebookUrl && (

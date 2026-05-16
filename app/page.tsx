@@ -10,6 +10,7 @@ import { SocialLinks } from '@/components/sections/social-links'
 import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { StatsRow } from '@/components/sections/stats-row'
 import { UpcomingEvents } from '@/components/sections/upcoming-events'
+import { testimonies } from '@/data/testimonies'
 
 export default function HomePage() {
   const featuredMaterials = materials.filter((item) => item.featured)
@@ -210,6 +211,61 @@ export default function HomePage() {
 
       {/* Upcoming Events */}
       <UpcomingEvents />
+
+      {/* Testimony highlight */}
+      {testimonies.length > 0 && (() => {
+        const latest = testimonies[0]
+        const ini = latest.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()
+        return (
+          <Section className="dark:bg-slate-950">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div className="max-w-2xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Testimonies</p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
+                  What God has done in us
+                </h2>
+                <p className="mt-3 text-base leading-7 text-text-soft dark:text-slate-400">
+                  Stories of grace from the members of Acts 242 — honest accounts of lives being changed by the Word and the Spirit.
+                </p>
+              </div>
+              <ButtonLink href="/testimonies" variant="ghost">
+                All testimonies →
+              </ButtonLink>
+            </div>
+
+            <div className="mt-10">
+              <Link
+                href={`/testimonies/${latest.id}`}
+                className="group flex flex-col gap-6 overflow-hidden rounded-3xl border border-border bg-white p-8 transition hover:-translate-y-1 hover:border-navy/20 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800 dark:hover:border-amber-300/30 sm:flex-row sm:items-start md:p-10"
+              >
+                {/* Avatar */}
+                {latest.photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={latest.photo}
+                    alt={latest.name}
+                    className="h-20 w-20 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-navy/10 text-xl font-bold text-navy dark:bg-amber-300/15 dark:text-amber-300">
+                    {ini}
+                  </div>
+                )}
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">{latest.name}</p>
+                  <blockquote className="mt-3 text-xl font-medium italic leading-8 text-foreground dark:text-slate-100 sm:text-2xl sm:leading-9">
+                    &ldquo;{latest.pullQuote}&rdquo;
+                  </blockquote>
+                  <p className="mt-4 text-base leading-7 text-text-soft dark:text-slate-400">{latest.summary}</p>
+                  <p className="mt-6 text-sm font-semibold text-navy transition group-hover:underline dark:text-amber-300">
+                    Read full testimony →
+                  </p>
+                </div>
+              </Link>
+            </div>
+          </Section>
+        )
+      })()}
 
       {/* Materials */}
       <Section className="bg-muted dark:bg-slate-900">

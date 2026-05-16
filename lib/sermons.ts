@@ -19,6 +19,7 @@ function parseSermonFile(filename: string): SermonFrontmatter {
     summary: data.summary as string,
     youtubeUrl: (data.youtubeUrl as string) || undefined,
     facebookUrl: (data.facebookUrl as string) || undefined,
+    driveUrl: (data.driveUrl as string) || undefined,
     pptxUrl: (data.pptxUrl as string) || undefined,
     posterImage: (data.posterImage as string) || undefined,
     brochureImages: data.brochureImages
@@ -58,6 +59,7 @@ export function getSermonBySlug(slug: string): Sermon | null {
     summary: data.summary as string,
     youtubeUrl: (data.youtubeUrl as string) || undefined,
     facebookUrl: (data.facebookUrl as string) || undefined,
+    driveUrl: (data.driveUrl as string) || undefined,
     pptxUrl: (data.pptxUrl as string) || undefined,
     posterImage: (data.posterImage as string) || undefined,
     brochureImages: data.brochureImages

@@ -57,6 +57,7 @@ export type SermonFrontmatter = {
   summary: string
   youtubeUrl?: string
   facebookUrl?: string
+  driveUrl?: string // Google Drive video (edited/produced recordings)
   pptxUrl?: string
   posterImage?: string
   brochureImages?: {
