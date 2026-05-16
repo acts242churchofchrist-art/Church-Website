@@ -21,6 +21,7 @@ export const testimonies: Testimony[] = [
     name: 'Bro. James',
     date: '2026-05-10',
     sermonSlug: '2026-05-10-bless-one-another-in-these-last-days',
+    photo: '/images/leadership/bro-james.jpg',
     pullQuote: 'Little by little, I chose my family. What\'s the point of temporary pleasure if you lose the gift of family?',
     summary:
       'Bro. James shared how years of chasing temporary pleasures slowly eroded the things that mattered most — until God, step by step, turned his heart back to what He had already given him.',

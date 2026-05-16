@@ -21,7 +21,7 @@ export const leadership: Leader[] = [
     name: 'Sis. Normie',
     title: "Women's Ministry Lead",
     ministry: 'Female Ministry and Pastoral Support',
-    photo: undefined, // PLACEHOLDER
+    photo: '/images/church/womens-ministry.jpg',
     isCore: true,
   },
   {

@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -14,24 +12,8 @@ import { coreLeadership, extendedTeam } from '@/data/leadership'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Learn about Acts 242 Church of Christ — our story, our mission, our pastor, and the team serving in Parañaque, Metro Manila.',
+    'Learn about Acts 242 Church of Christ — our story, our pastor Bro. Marc, our leadership team, and our congregation in Parañaque, Metro Manila.',
 }
-
-const isDev = process.env.NODE_ENV === 'development'
-
-function DevNote({ label }: { label: string }) {
-  if (!isDev) return null
-  return (
-    <p className="mb-3 rounded border border-amber-200 bg-amber-50 px-2 py-1 text-xs text-amber-600">
-      ⚠ Mockup — {label}
-    </p>
-  )
-}
-
-// Check at build time whether the church interior photo has been uploaded
-const churchInteriorExists =
-  fs.existsSync(path.join(process.cwd(), 'public', 'images', 'church-interior.jpg')) ||
-  fs.existsSync(path.join(process.cwd(), 'public', 'images', 'church-interior.jpeg'))
 
 const pastor = coreLeadership.find((l) => l.name === 'Bro. Marc')!
 
@@ -44,22 +26,69 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
         <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
-          <div className="max-w-3xl">
-            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Acts 242 Church of Christ</p>
-            <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Who we are.<br />
-              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">A church for the next generation.</span>
-            </h1>
-            <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
-              Acts 242 Church of Christ is a community in Parañaque devoted to God&apos;s Word, prayer, fellowship, and the faithful making of disciples — named after the pattern found in Acts 2:42.
-            </p>
-            <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
-              <a href="#story" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
-                Our story →
-              </a>
-              <Link href="/connect" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
-                Connect with us
-              </Link>
+          <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:items-start">
+            {/* Left — text */}
+            <div>
+              <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Acts 242 Church of Christ</p>
+              <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+                Who we are.<br />
+                <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">A church for the next generation.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
+                Acts 242 Church of Christ is a community in Parañaque devoted to God&apos;s Word, prayer, fellowship, and the faithful making of disciples — named after the pattern found in Acts 2:42.
+              </p>
+              <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
+                <a href="#story" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                  Our story →
+                </a>
+                <Link href="/connect" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                  Connect with us
+                </Link>
+              </div>
+            </div>
+
+            {/* Right — quick facts card */}
+            <div className="animate-fade-up-delay-2 hidden lg:block">
+              <div className="rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-300">Quick facts</p>
+                <ul className="mt-4 space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 text-amber-300">✦</span>
+                    <div>
+                      <p className="text-xs font-semibold text-white/60">Founded</p>
+                      <p className="text-sm font-medium text-white">Incorporated Feb 2026 (SEC Philippines)</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 text-amber-300">✦</span>
+                    <div>
+                      <p className="text-xs font-semibold text-white/60">Where</p>
+                      <p className="text-sm font-medium text-white">Parañaque, Metro Manila</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 text-amber-300">✦</span>
+                    <div>
+                      <p className="text-xs font-semibold text-white/60">Sunday Service</p>
+                      <p className="text-sm font-medium text-white">10:00 AM – 12:30 PM</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <div className="mt-6 overflow-hidden rounded-2xl border border-white/15">
+                  <div className="relative aspect-video">
+                    <Image
+                      src="/images/church/congregation-worship.jpg"
+                      alt="Acts 242 congregation in Sunday worship"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="bg-white/10 px-3 py-2 text-xs text-white/60">
+                    Sunday Worship Service — every Sunday 10:00 AM
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -141,22 +170,13 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* PHOTO PLACEHOLDER — upload worship hall photo to /public/images/church-interior.jpeg */}
-          <div className="relative overflow-hidden rounded-3xl">
-            <DevNote label="Church interior photo pending — upload to /public/images/church-interior.jpeg" />
-            {churchInteriorExists ? (
-              <Image
-                src="/images/church-interior.jpeg"
-                alt="Acts 242 worship hall"
-                width={800}
-                height={560}
-                className="w-full rounded-3xl object-cover"
-              />
-            ) : (
-              <div className="flex h-64 items-center justify-center rounded-3xl bg-navy/10 lg:h-80 dark:bg-amber-300/10">
-                <p className="text-sm font-medium text-navy/40 dark:text-amber-300/60">Acts 242 Worship Hall</p>
-              </div>
-            )}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border shadow-calm">
+            <Image
+              src="/images/church/worship-hall.jpg"
+              alt="Acts 242 Worship Hall — 4707 Dr Arcadio Santos Ave, Parañaque"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
       </Section>
@@ -168,9 +188,13 @@ export default function AboutPage() {
 
         <div className="mt-8 rounded-3xl border border-border border-l-4 border-l-navy bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800 dark:border-l-amber-300">
           <div className="flex flex-col gap-8 md:flex-row md:items-start">
-            <div className="flex flex-col items-center gap-2 md:items-start">
-              <DevNote label="Pastor photo pending — add to /public/images/leadership/bro-marc.jpg" />
-              <LeaderAvatar name={pastor.name} photo={pastor.photo} size="lg" />
+            <div className="relative h-48 w-48 shrink-0 overflow-hidden rounded-3xl border border-border shadow-calm lg:h-64 lg:w-64">
+              <Image
+                src="/images/church/pastor-preaching.jpg"
+                alt="Bro. Marc — Pastor of Acts 242 Church of Christ"
+                fill
+                className="object-cover object-top"
+              />
             </div>
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-foreground dark:text-slate-100">{pastor.name}</h3>
@@ -205,7 +229,6 @@ export default function AboutPage() {
             >
               <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-navy/5 transition group-hover:bg-navy/10 dark:bg-amber-300/5" />
               <div className="relative flex flex-col items-center">
-                <DevNote label="Leadership photos pending" />
                 <LeaderAvatar name={leader.name} photo={leader.photo} size="md" />
                 <h3 className="mt-4 text-lg font-semibold text-foreground dark:text-slate-100">{leader.name}</h3>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
@@ -218,7 +241,43 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ── 7. Extended Team ── */}
+      {/* ── 7. Community ── */}
+      <Section className="bg-muted dark:bg-slate-900">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+              Our Community
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
+              A family growing together
+            </h2>
+            <p className="mt-5 text-base leading-8 text-text-soft dark:text-slate-400">
+              Acts 242 is made up of families, young adults, seniors, and children — all at different points in their walk with God, all devoted to growing together. Every Sunday we gather to worship, hear the Word, share communion, and encourage one another. Every week is a reminder that the church is not a building — it is the people God has called together.
+            </p>
+          </div>
+
+          <div className="grid gap-4">
+            <div className="relative aspect-video overflow-hidden rounded-3xl border border-border shadow-calm">
+              <Image
+                src="/images/church/congregation-worship.jpg"
+                alt="Acts 242 congregation in worship"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative aspect-video overflow-hidden rounded-3xl border border-border shadow-calm">
+              <Image
+                src="/images/church/congregation-fellowship.jpg"
+                alt="Acts 242 members in fellowship"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ── 8. Extended Team ── */}
       <Section>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Our Team</p>
         <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
