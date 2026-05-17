@@ -15,6 +15,7 @@ const navItems = [
   { href: '/testimonies', label: 'Testimonies' },
   { href: '/live', label: 'Live' },
   { href: '/sermons', label: 'Sermons' },
+  { href: '/gallery', label: 'Gallery' },
   { href: '/discipleship', label: 'Discipleship' },
   { href: '/materials', label: 'Materials' },
   { href: '/connect', label: 'Connect' },

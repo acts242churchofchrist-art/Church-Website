@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { LessonCard } from '@/components/cards/lesson-card'
@@ -11,6 +12,12 @@ import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { StatsRow } from '@/components/sections/stats-row'
 import { UpcomingEvents } from '@/components/sections/upcoming-events'
 import { testimonies } from '@/data/testimonies'
+import { galleryAlbums } from '@/data/gallery'
+
+const latestAlbum = [...galleryAlbums].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+)[0]
+const featuredGalleryPhotos = latestAlbum?.photos.filter((p) => p.featured).slice(0, 3) ?? []
 
 export default function HomePage() {
   const featuredMaterials = materials.filter((item) => item.featured)
@@ -266,6 +273,48 @@ export default function HomePage() {
           </Section>
         )
       })()}
+
+      {/* Gallery teaser */}
+      {latestAlbum && featuredGalleryPhotos.length > 0 && (
+        <Section className="bg-muted dark:bg-slate-900">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Gallery</p>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
+                Life at Acts 242
+              </h2>
+            </div>
+            <Link href="/gallery" className="text-sm font-semibold text-navy hover:underline dark:text-amber-300">
+              View all →
+            </Link>
+          </div>
+
+          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
+            {featuredGalleryPhotos.map((photo) => (
+              <Link key={photo.filename} href={`/gallery/${latestAlbum.id}`}>
+                <div className="relative aspect-square overflow-hidden rounded-2xl border border-border shadow-calm dark:border-slate-700">
+                  <Image
+                    src={`${latestAlbum.folder}/${photo.filename}`}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 rounded-2xl border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-white dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+            >
+              See more from the gallery
+            </Link>
+          </div>
+        </Section>
+      )}
 
       {/* Materials */}
       <Section className="bg-muted dark:bg-slate-900">
