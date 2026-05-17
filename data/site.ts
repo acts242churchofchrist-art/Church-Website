@@ -7,8 +7,9 @@ export const siteConfig = {
   mapsUrl: 'https://maps.app.goo.gl/TcXp4d7Xth8ZUQEMA',
   facebookUrl: 'https://www.facebook.com/profile.php?id=100069363818681',
   messengerUrl: 'https://m.me/100069363818681',
-  youtubeUrl: 'https://www.youtube.com/@A242StudioHub',
-  liveEmbedUrl: 'https://www.youtube.com/embed/live_stream?channel=UC2wraRMnOSzefhVFjXJ51hg',
+  youtubeUrl: 'https://www.youtube.com/@Acts242ChurchofChrist',
+  youtubeChannelId: 'UC2wraRMnOSzefhVFjXJ51hg',
+  liveEmbedUrl: 'https://www.youtube.com/embed/live_stream?channel=UC2wraRMnOSzefhVFjXJ51hg&autoplay=0&rel=0',
 
   // Formspree endpoints
   prayerRequestFormUrl: 'https://formspree.io/f/mdayzprr',

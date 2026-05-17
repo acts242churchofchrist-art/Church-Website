@@ -50,15 +50,32 @@ export default function LivePage() {
       </section>
 
       <Section className="bg-muted dark:bg-slate-900">
-        <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">
+        <div className="relative w-full overflow-hidden rounded-3xl bg-black" style={{ aspectRatio: '16/9' }}>
           <iframe
-            className="aspect-video w-full"
+            className="absolute inset-0 h-full w-full"
             src={siteConfig.liveEmbedUrl}
-            title="Acts 242 Live Stream"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            title="Acts 242 Church of Christ — Live"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
         </div>
+
+        <div className="mt-4 rounded-2xl border border-border bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
+          <p className="text-sm text-text-soft dark:text-slate-400">
+            <span className="font-semibold text-foreground dark:text-slate-100">Not live right now?</span>{' '}
+            We go live every Sunday at 10:00 AM and Friday at 5:30 PM.{' '}
+            <a
+              href={siteConfig.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-navy hover:underline dark:text-amber-300"
+            >
+              Subscribe on YouTube
+            </a>{' '}
+            to get notified when we go live.
+          </p>
+        </div>
+
         {/* This week's materials — directly below the embed, no gap */}
         <CurrentWeekMaterialsCard />
       </Section>
