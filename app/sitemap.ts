@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllSermonsMeta } from '@/lib/sermons'
+import { getAllMidweek } from '@/lib/midweek'
 import { lessons } from '@/data/lessons'
 
 const BASE_URL = 'https://www.acts242churchofchrist.com'
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/live`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/sermons`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/midweek`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE_URL}/discipleship`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/discipleship/water-baptism`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/materials`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
@@ -35,5 +37,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticRoutes, ...lessonRoutes, ...sermonRoutes]
+  const midweek = getAllMidweek()
+  const midweekRoutes: MetadataRoute.Sitemap = midweek.map((message) => ({
+    url: `${BASE_URL}/midweek/${message.slug}`,
+    lastModified: new Date(message.date),
+    changeFrequency: 'never',
+    priority: 0.6,
+  }))
+
+  return [...staticRoutes, ...lessonRoutes, ...sermonRoutes, ...midweekRoutes]
 }

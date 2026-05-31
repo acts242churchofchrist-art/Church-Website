@@ -26,7 +26,7 @@ export const leadership: Leader[] = [
   },
   {
     name: 'Sis. Karol',
-    title: "Church Elder & Women's Ministry Leader",
+    title: "Women's Ministry Lead",
     ministry: "Children's Ministry and Single Mothers Ministry",
     photo: undefined, // PLACEHOLDER
     isCore: true,
