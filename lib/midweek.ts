@@ -13,7 +13,7 @@ function parseMidweekFile(filename: string): SermonFrontmatter {
   return {
     slug,
     title: data.title as string,
-    preacher: data.preacher as string,
+    preacher: (data.preacher as string) || 'Bro. Marc',
     date: data.date as string,
     passage: data.passage as string,
     summary: data.summary as string,
@@ -53,7 +53,7 @@ export function getMidweekBySlug(slug: string): Sermon | null {
   return {
     slug,
     title: data.title as string,
-    preacher: data.preacher as string,
+    preacher: (data.preacher as string) || 'Bro. Marc',
     date: data.date as string,
     passage: data.passage as string,
     summary: data.summary as string,

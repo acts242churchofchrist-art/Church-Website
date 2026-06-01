@@ -1,5 +1,9 @@
 # Acts 242 Website — Build Log
 
+## Changelog
+
+- **June 2026 update** — events, preaching schedule, Sis. Karol designation updated per May 30 meeting minutes.
+
 ## Task Status
 
 | Task | Status | Notes |

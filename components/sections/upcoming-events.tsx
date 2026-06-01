@@ -1,6 +1,7 @@
 import {
   recurringEvents,
   datedEvents,
+  comingSoonEvents,
   upcomingPreachingSchedule,
   eventTypeColors,
   eventTypeLabels,
@@ -126,7 +127,7 @@ export function UpcomingEvents() {
         <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted dark:border-slate-700 dark:bg-slate-900">
           <div className="border-b border-border px-5 py-3 dark:border-slate-700">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
-              May Preaching Schedule
+              June Preaching Schedule
             </p>
           </div>
           <div className="divide-y divide-border dark:divide-slate-700">
@@ -149,16 +150,49 @@ export function UpcomingEvents() {
       )}
 
       {/* Dated activities */}
-      {datedEvents.length > 0 && (
+      {(datedEvents.length > 0 || comingSoonEvents.length > 0) && (
         <div className="mt-12">
           <h3 className="text-xl font-semibold text-foreground dark:text-slate-100">
             Upcoming activities
           </h3>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {datedEvents.slice(0, 4).map((event) => (
-              <DatedEventCard key={event.id} event={event} />
-            ))}
-          </div>
+          {datedEvents.length > 0 && (
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {datedEvents.slice(0, 4).map((event) => (
+                <DatedEventCard key={event.id} event={event} />
+              ))}
+            </div>
+          )}
+
+          {/* Coming soon events — no specific date yet */}
+          {comingSoonEvents.length > 0 && (
+            <div className="mt-6 border-t border-border pt-6 dark:border-slate-700">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-text-soft dark:text-slate-400">
+                Also coming — dates to be announced
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {comingSoonEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="rounded-2xl border border-border bg-muted px-4 py-3 dark:border-slate-700 dark:bg-slate-800"
+                  >
+                    {event.ministry && (
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-navy/60 dark:text-amber-300/60">
+                        {event.ministry}
+                      </p>
+                    )}
+                    <p className="text-sm font-semibold text-foreground dark:text-slate-100">
+                      {event.title}
+                    </p>
+                    {event.description && (
+                      <p className="mt-1 text-xs text-text-soft dark:text-slate-400">
+                        {event.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </Section>
