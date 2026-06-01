@@ -51,7 +51,7 @@ export default async function TestimonyDetailPage({ params }: Props) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
         <div className="relative mx-auto max-w-content px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <Link
-            href="/testimonies"
+            href="/community#testimonies"
             className="mb-8 inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-white"
           >
             ← All testimonies
@@ -141,7 +141,7 @@ export default async function TestimonyDetailPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/testimonies"
+              href="/community#testimonies"
               className="inline-flex items-center justify-center rounded-full bg-navy px-7 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200"
             >
               All testimonies

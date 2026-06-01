@@ -12,13 +12,9 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/testimonies', label: 'Testimonies' },
-  { href: '/live', label: 'Live' },
   { href: '/sermons', label: 'Sermons' },
-  { href: '/midweek', label: 'Midweek' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/discipleship', label: 'Discipleship' },
-  { href: '/materials', label: 'Materials' },
+  { href: '/community', label: 'Community' },
+  { href: '/grow', label: 'Grow' },
   { href: '/connect', label: 'Connect' },
 ]
 

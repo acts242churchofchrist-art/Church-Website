@@ -57,13 +57,13 @@ export default function HomePage() {
                 Start here
               </Link>
               <Link
-                href="/discipleship"
+                href="/grow"
                 className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20"
               >
                 Begin discipleship
               </Link>
               <Link
-                href="/live"
+                href="/sermons#live"
                 className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white/90 transition hover:text-white"
               >
                 Watch live →
@@ -155,7 +155,7 @@ export default function HomePage() {
               A clear path through the essentials of the Christian life — for new believers and for any disciple wanting to revisit the basics.
             </p>
           </div>
-          <ButtonLink href="/discipleship" variant="ghost">
+          <ButtonLink href="/grow" variant="ghost">
             View all lessons →
           </ButtonLink>
         </div>
@@ -191,7 +191,7 @@ export default function HomePage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/live"
+                  href="/sermons#live"
                   className="inline-flex items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200"
                 >
                   Go to live page
@@ -235,7 +235,7 @@ export default function HomePage() {
                   Stories of grace from the members of Acts 242 — honest accounts of lives being changed by the Word and the Spirit.
                 </p>
               </div>
-              <ButtonLink href="/testimonies" variant="ghost">
+              <ButtonLink href="/community" variant="ghost">
                 All testimonies →
               </ButtonLink>
             </div>
@@ -284,7 +284,7 @@ export default function HomePage() {
                 Life at Acts 242
               </h2>
             </div>
-            <Link href="/gallery" className="text-sm font-semibold text-navy hover:underline dark:text-amber-300">
+            <Link href="/community#gallery" className="text-sm font-semibold text-navy hover:underline dark:text-amber-300">
               View all →
             </Link>
           </div>
@@ -307,7 +307,7 @@ export default function HomePage() {
 
           <div className="mt-6 text-center">
             <Link
-              href="/gallery"
+              href="/community#gallery"
               className="inline-flex items-center gap-2 rounded-2xl border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-white dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
             >
               See more from the gallery
@@ -328,7 +328,7 @@ export default function HomePage() {
               Foundation guide, sermon slides, brochures, and printable evangelism materials — all freely available.
             </p>
           </div>
-          <ButtonLink href="/materials" variant="ghost">
+          <ButtonLink href="/grow#materials" variant="ghost">
             Browse all materials →
           </ButtonLink>
         </div>

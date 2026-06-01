@@ -28,6 +28,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'mdx'],
 
+  async redirects() {
+    return [
+      { source: '/live', destination: '/sermons#live', permanent: true },
+      { source: '/midweek', destination: '/sermons#midweek', permanent: true },
+      { source: '/testimonies', destination: '/community', permanent: true },
+      { source: '/gallery', destination: '/community#gallery', permanent: true },
+      { source: '/discipleship', destination: '/grow', permanent: true },
+      { source: '/materials', destination: '/grow#materials', permanent: true },
+    ]
+  },
+
   async headers() {
     return [
       {

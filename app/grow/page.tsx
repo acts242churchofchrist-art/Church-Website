@@ -1,10 +1,27 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { LessonCard } from '@/components/cards/lesson-card'
+import { MaterialCard } from '@/components/cards/material-card'
+import { MaterialHeroCard } from '@/components/cards/material-hero-card'
 import { lessons } from '@/data/lessons'
+import { materials } from '@/data/materials'
 
-export default function DiscipleshipPage() {
+export const metadata: Metadata = {
+  title: 'Grow',
+  description:
+    'Grow as a disciple of Jesus — seven foundation lessons, water baptism, and downloadable resources for study, evangelism, and discipleship from Acts 242 Church of Christ.',
+}
+
+const foundationGuide = materials.find((m) => m.id === 'foundation-guide')
+const foundationExtras = materials.filter(
+  (m) => m.category === 'Foundation and Discipleship' && m.id !== 'foundation-guide'
+)
+const evangelismMaterials = materials.filter((m) => m.category === 'Evangelism Materials')
+const sermonMaterials = materials.filter((m) => m.category === 'Sermon Materials')
+
+export default function GrowPage() {
   return (
     <>
       {/* ── Hero ── */}
@@ -14,27 +31,28 @@ export default function DiscipleshipPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
         <div className="relative mx-auto max-w-content px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <div className="max-w-3xl">
-            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Foundation Lessons</p>
+            <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">Discipleship and Resources</p>
             <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
               Know Christ.<br />
               <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">Walk as His disciple.</span>
             </h1>
             <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
-              Seven lessons to ground you in the Christian life — for new believers and for any disciple wanting to revisit the basics.
+              Seven lessons to ground you in the Christian life, plus resources to study, share, and grow — for new believers and for any disciple revisiting the basics.
             </p>
             <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
               <Link href={`/discipleship/${lessons[0].slug}`} className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
                 Begin Lesson 1
               </Link>
-              <Link href="/discipleship/water-baptism" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
-                Learn about baptism
-              </Link>
+              <a href="#materials" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
+                Browse resources
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <Section className="bg-muted dark:bg-slate-900">
+      {/* ── Discipleship: the journey ── */}
+      <Section id="discipleship" className="bg-muted dark:bg-slate-900">
         <div className="rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">The journey</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Seven lessons, one step at a time</h2>
@@ -57,6 +75,7 @@ export default function DiscipleshipPage() {
         </div>
       </Section>
 
+      {/* ── Lessons grid ── */}
       <Section>
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -71,6 +90,7 @@ export default function DiscipleshipPage() {
         </div>
       </Section>
 
+      {/* ── Water Baptism ── */}
       <Section className="bg-muted dark:bg-slate-900">
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
@@ -99,6 +119,86 @@ export default function DiscipleshipPage() {
               a new life.&rdquo;
             </p>
           </div>
+        </div>
+      </Section>
+
+      {/* ── Materials: Foundation Guide hero ── */}
+      <Section id="materials">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Resources</p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-slate-100">
+            Study, share, and grow in the Word
+          </h2>
+          <p className="mt-4 text-base leading-8 text-text-soft dark:text-slate-400">
+            Download and share these resources freely — for personal study, evangelism conversations, and discipleship. All materials are prepared by Acts 242 Church of Christ.
+          </p>
+        </div>
+
+        {foundationGuide && (
+          <div className="mt-12">
+            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+              Start Here
+            </p>
+            <MaterialHeroCard item={foundationGuide} />
+          </div>
+        )}
+
+        {foundationExtras.length > 0 && (
+          <div className="mt-12">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+              Foundation and Discipleship
+            </p>
+            <h3 className="mt-4 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
+              More discipleship resources
+            </h3>
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {foundationExtras.map((item) => (
+                <MaterialCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+      </Section>
+
+      {/* ── Evangelism Materials ── */}
+      <Section className="bg-muted dark:bg-slate-900">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+            Evangelism Materials
+          </p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
+            Share the gospel
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft dark:text-slate-400">
+            These materials are designed for first conversations — hand them out after a
+            conversation, at the gate, in your community, or after Sunday service.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {evangelismMaterials.map((item) => (
+            <MaterialCard key={item.id} item={item} />
+          ))}
+        </div>
+      </Section>
+
+      {/* ── Sermon Materials ── */}
+      <Section>
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+            Sermon Materials
+          </p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
+            Continue in the teaching
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-text-soft dark:text-slate-400">
+            Browse weekly sermon outlines, brochures, and recordings from Acts 242 Church of
+            Christ.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {sermonMaterials.map((item) => (
+            <MaterialCard key={item.id} item={item} />
+          ))}
         </div>
       </Section>
     </>

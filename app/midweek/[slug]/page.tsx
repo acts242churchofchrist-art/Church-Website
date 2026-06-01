@@ -361,7 +361,7 @@ export default async function MidweekMessagePage({ params }: Props) {
               )}
             </div>
 
-            <ButtonLink href="/midweek" variant="secondary">
+            <ButtonLink href="/sermons#midweek" variant="secondary">
               All devotionals
             </ButtonLink>
 

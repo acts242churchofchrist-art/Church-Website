@@ -57,7 +57,7 @@ export default async function GalleryAlbumPage({ params }: Props) {
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="mx-auto w-full max-w-content px-4 pb-12 sm:px-6 lg:px-8">
             <Link
-              href="/gallery"
+              href="/community#gallery"
               className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-white"
             >
               ← Back to Gallery
@@ -166,7 +166,7 @@ export default async function GalleryAlbumPage({ params }: Props) {
             See more from the church
           </h2>
           <Link
-            href="/gallery"
+            href="/community#gallery"
             className="inline-flex items-center justify-center rounded-full bg-navy px-7 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200"
           >
             ← Back to Gallery

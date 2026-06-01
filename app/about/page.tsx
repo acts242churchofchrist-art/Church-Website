@@ -311,7 +311,7 @@ export default function AboutPage() {
           <p className="mt-3 text-base text-text-soft dark:text-slate-400">{siteConfig.address}</p>
           <div className="mt-6 flex flex-wrap gap-4">
             <ButtonLink href="/connect">Get in touch</ButtonLink>
-            <ButtonLink href="/live" variant="secondary">
+            <ButtonLink href="/sermons#live" variant="secondary">
               Watch online
             </ButtonLink>
             <a

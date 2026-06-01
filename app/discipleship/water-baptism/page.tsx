@@ -13,7 +13,7 @@ export default function WaterBaptismPage() {
           actions={
             <>
               <ButtonLink href="/connect">Talk to a pastor</ButtonLink>
-              <ButtonLink href="/discipleship" variant="secondary">
+              <ButtonLink href="/grow#discipleship" variant="secondary">
                 Back to discipleship
               </ButtonLink>
             </>

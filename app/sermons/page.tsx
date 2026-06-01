@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
+import { CurrentWeekMaterialsCard } from '@/components/sections/current-week-materials'
 import { getAllSermons } from '@/lib/sermons'
+import { getAllMidweek } from '@/lib/midweek'
 import { sermonArchive } from '@/data/sermon-archive'
 import { siteConfig } from '@/data/site'
 import type { SermonFrontmatter } from '@/types/content'
 
 export const metadata = {
   title: 'Sermons',
-  description: 'Weekly preaching from Acts 242 Church of Christ — biblical teaching rooted in Scripture.',
+  description: 'Watch live, browse Sunday sermons and midweek devotionals from Acts 242 Church of Christ — biblical teaching rooted in Scripture.',
 }
 
 function formatDate(dateStr: string) {
@@ -21,18 +23,18 @@ function formatDate(dateStr: string) {
   })
 }
 
-function SermonCard({ sermon }: { sermon: SermonFrontmatter }) {
+function MessageCard({ message, basePath }: { message: SermonFrontmatter; basePath: string }) {
   return (
     <Link
-      href={`/sermons/${sermon.slug}`}
+      href={`${basePath}/${message.slug}`}
       className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-0.5 hover:shadow-calm dark:border-slate-700 dark:bg-slate-800"
     >
       {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden bg-navy">
-        {sermon.posterImage ? (
+        {message.posterImage ? (
           <Image
-            src={sermon.posterImage}
-            alt={sermon.title}
+            src={message.posterImage}
+            alt={message.title}
             fill
             className="object-cover transition group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
@@ -47,16 +49,16 @@ function SermonCard({ sermon }: { sermon: SermonFrontmatter }) {
       {/* Card body */}
       <div className="flex flex-1 flex-col p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
-          {formatDate(sermon.date)}
+          {formatDate(message.date)}
         </p>
         <h2 className="mt-2 text-lg font-semibold leading-snug text-foreground line-clamp-2 dark:text-slate-100">
-          {sermon.title}
+          {message.title}
         </h2>
         <p className="mt-1 text-sm text-text-soft dark:text-slate-400">
-          {sermon.passage} — {sermon.preacher}
+          {message.passage} — {message.preacher}
         </p>
         <p className="mt-3 flex-1 text-sm leading-7 text-text-soft line-clamp-2 dark:text-slate-400">
-          {sermon.summary}
+          {message.summary}
         </p>
         <span className="mt-5 text-sm font-semibold text-navy group-hover:underline dark:text-amber-300">
           Read message notes →
@@ -68,6 +70,7 @@ function SermonCard({ sermon }: { sermon: SermonFrontmatter }) {
 
 export default function SermonsPage() {
   const sermons = getAllSermons()
+  const midweek = getAllMidweek()
 
   return (
     <>
@@ -82,16 +85,16 @@ export default function SermonsPage() {
           <div className="max-w-3xl">
             <p className="animate-fade-up text-sm font-semibold uppercase tracking-[0.24em] text-amber-300">2026 — All About Jesus</p>
             <h1 className="mt-4 animate-fade-up-delay-1 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Teaching from<br />
-              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">Acts 242.</span>
+              Watch and grow<br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">in the Word.</span>
             </h1>
             <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
-              Browse weekly sermon outlines, brochures, and recordings. Every message is available to read, watch, and download.
+              We go live every Sunday at 10:00 AM and every Friday at 5:30 PM. Browse Sunday sermons and midweek devotionals — each message is available to read, watch, and download.
             </p>
             <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
-              <Link href="/live" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
-                Watch this Sunday
-              </Link>
+              <a href="#live" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
+                Watch live
+              </a>
               <a href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/20">
                 Subscribe on YouTube
               </a>
@@ -100,15 +103,57 @@ export default function SermonsPage() {
         </div>
       </section>
 
-      {/* ── 2026 Current Year ── */}
-      <Section className="bg-muted dark:bg-slate-900">
+      {/* ── Live embed ── */}
+      <Section id="live" className="bg-muted dark:bg-slate-900">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Live</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Watch this Sunday</h2>
+          </div>
+          <ButtonLink href={siteConfig.facebookUrl} variant="secondary">
+            Follow on Facebook
+          </ButtonLink>
+        </div>
+
+        <div className="mt-8 relative w-full overflow-hidden rounded-3xl bg-black" style={{ aspectRatio: '16/9' }}>
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src={siteConfig.liveEmbedUrl}
+            title="Acts 242 Church of Christ — Live"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="mt-4 rounded-2xl border border-border bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
+          <p className="text-sm text-text-soft dark:text-slate-400">
+            <span className="font-semibold text-foreground dark:text-slate-100">Not live right now?</span>{' '}
+            We go live every Sunday at 10:00 AM and Friday at 5:30 PM.{' '}
+            <a
+              href={siteConfig.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-navy hover:underline dark:text-amber-300"
+            >
+              Subscribe on YouTube
+            </a>{' '}
+            to get notified when we go live.
+          </p>
+        </div>
+
+        {/* This week's materials — directly below the embed */}
+        <CurrentWeekMaterialsCard />
+      </Section>
+
+      {/* ── Sunday Sermons ── */}
+      <Section id="sunday">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
               {siteConfig.yearThemeYear} — {siteConfig.yearTheme}
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
-              {siteConfig.yearThemeYear} Sermons
+              Sunday Sermons
             </h2>
           </div>
           <ButtonLink href={siteConfig.youtubeUrl} variant="secondary">
@@ -131,11 +176,35 @@ export default function SermonsPage() {
         ) : (
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {sermons.map((sermon) => (
-              <SermonCard key={sermon.slug} sermon={sermon} />
+              <MessageCard key={sermon.slug} message={sermon} basePath="/sermons" />
             ))}
           </div>
         )}
       </Section>
+
+      {/* ── Midweek Devotionals ── */}
+      {midweek.length > 0 && (
+        <Section id="midweek" className="bg-muted dark:bg-slate-900">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+                Midweek
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
+                Midweek Devotionals
+              </h2>
+              <p className="mt-3 max-w-2xl text-base text-text-soft dark:text-slate-400">
+                A moment to pause, open the Word together, and be refreshed before Sunday comes around again.
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {midweek.map((message) => (
+              <MessageCard key={message.slug} message={message} basePath="/midweek" />
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* ── Sermon Archive ── */}
       <Section>

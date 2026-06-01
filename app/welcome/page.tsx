@@ -82,7 +82,7 @@ export default function WelcomePage() {
             <p className="mt-3 text-sm leading-7 text-text-soft dark:text-slate-400">
               We offer personal Bible study for anyone wanting to grow in God&apos;s Word. Reach out and we&apos;ll match you with someone from our team.
             </p>
-            <ButtonLink href="/discipleship" variant="ghost" className="mt-6 px-0">
+            <ButtonLink href="/grow#discipleship" variant="ghost" className="mt-6 px-0">
               Start the foundation lessons
             </ButtonLink>
           </div>
@@ -124,7 +124,7 @@ export default function WelcomePage() {
               <div className="mt-6 space-y-3 text-center">
                 <p className="text-xl font-bold tracking-tight text-foreground dark:text-slate-100">Welcome to Acts 242.</p>
                 <p className="text-sm leading-7 text-text-soft dark:text-slate-400">We received your details and will be in touch soon. We&apos;re glad you&apos;re here.</p>
-                <ButtonLink href="/discipleship" variant="secondary" className="mt-2">Start the lessons</ButtonLink>
+                <ButtonLink href="/grow#discipleship" variant="secondary" className="mt-2">Start the lessons</ButtonLink>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-6 space-y-5">
