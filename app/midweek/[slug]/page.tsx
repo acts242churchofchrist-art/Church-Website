@@ -43,7 +43,8 @@ function formatDate(dateStr: string) {
 }
 
 function youtubeEmbedUrl(url: string): string {
-  const match = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)
+  // Supports watch?v=, youtu.be/, /live/ (live stream), /embed/, and /shorts/ forms
+  const match = url.match(/(?:v=|youtu\.be\/|\/live\/|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)
   return match ? `https://www.youtube.com/embed/${match[1]}` : url
 }
 
