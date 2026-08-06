@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Section } from '@/components/layout/section'
 import { SocialLinks } from '@/components/sections/social-links'
 import { ButtonLink } from '@/components/ui/button-link'
@@ -131,9 +132,25 @@ export default function ConnectPage() {
                 <span className="font-semibold text-foreground dark:text-slate-200">Email: </span>
                 <a href={`mailto:${siteConfig.email}`} className="text-navy hover:underline dark:text-amber-300">{siteConfig.email}</a>
               </p>
-              <p>
+              <p className="flex flex-wrap items-center gap-x-2">
                 <span className="font-semibold text-foreground dark:text-slate-200">Phone / Text: </span>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="text-navy hover:underline dark:text-amber-300">{siteConfig.phone}</a>
+                {/* Rendered as an image so the number is not machine-readable — see data/site.ts */}
+                <Image
+                  src="/images/contact/phone-light.png"
+                  alt="Our phone and text number"
+                  width={96}
+                  height={14}
+                  className="inline-block h-[14px] w-auto dark:hidden"
+                  unoptimized
+                />
+                <Image
+                  src="/images/contact/phone-dark.png"
+                  alt="Our phone and text number"
+                  width={96}
+                  height={14}
+                  className="hidden h-[14px] w-auto dark:inline-block"
+                  unoptimized
+                />
               </p>
               <p>
                 <span className="font-semibold text-foreground dark:text-slate-200">Messenger: </span>

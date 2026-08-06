@@ -53,7 +53,7 @@ const organizationSchema = {
   url: 'https://www.acts242churchofchrist.com',
   logo: 'https://www.acts242churchofchrist.com/images/logo.svg',
   email: siteConfig.email,
-  telephone: siteConfig.phone,
+  // `telephone` intentionally omitted — see the note in data/site.ts
   address: {
     '@type': 'PostalAddress',
     streetAddress: '4707 Dr Arcadio Santos Ave',

@@ -2,7 +2,12 @@ export const siteConfig = {
   churchName: 'Acts 242',
   fullChurchName: 'Acts 242 Church of Christ',
   email: 'acts242churchofchrist@gmail.com',
-  phone: '0917 800 7850',
+  // NOTE: The church phone number is deliberately NOT stored here as text.
+  // Search engines and scrapers were indexing it and auto-attributing the
+  // number to "Acts242". It is now shown only as an image on /connect
+  // (public/images/contact/phone-*.png) and in the sermon brochures.
+  // Do not re-add a `phone` string, a tel: link, or a JSON-LD `telephone`
+  // field — that would undo the fix.
   address: '4707 Dr Arcadio Santos Ave, Parañaque, 1700 Metro Manila',
   mapsUrl: 'https://maps.app.goo.gl/TcXp4d7Xth8ZUQEMA',
   facebookUrl: 'https://www.facebook.com/profile.php?id=100069363818681',
