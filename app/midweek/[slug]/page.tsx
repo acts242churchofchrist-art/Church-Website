@@ -8,7 +8,7 @@ import { ButtonLink } from '@/components/ui/button-link'
 import { getAllMidweek, getMidweekBySlug, getAdjacentMidweek } from '@/lib/midweek'
 import { siteConfig } from '@/data/site'
 
-const SITE_URL = 'https://acts242.vercel.app'
+const SITE_URL = 'https://www.acts242churchofchrist.com'
 
 type Props = { params: Promise<{ slug: string }> }
 

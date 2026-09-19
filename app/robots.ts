@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://acts242.vercel.app/sitemap.xml',
+    sitemap: 'https://www.acts242churchofchrist.com/sitemap.xml',
   }
 }
