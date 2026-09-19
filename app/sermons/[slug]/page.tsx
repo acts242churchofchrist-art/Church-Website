@@ -94,29 +94,41 @@ export default async function SermonPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ── 1. Hero — poster or text ── */}
+      {/* ── 1. Hero — poster or text ──
+          Every weekly poster is a finished 1414×2000 artwork that already carries the
+          title, the speaker and the verse. Cropping it to a landscape band with
+          `object-cover` put that crop straight through its own headline, so the title
+          printed twice — once in the art, once in the h1 laid over it — and at 375px
+          neither was legible. It is shown whole against a flat navy ground instead,
+          which also drops the hero request from a full-viewport-width fetch to ~320px. */}
       {hasPoster ? (
-        <div className="relative min-h-[380px] w-full overflow-hidden bg-navy sm:min-h-[460px]">
-          <Image
-            src={sermon.posterImage!}
-            alt={sermon.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          {/* gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
-          {/* text */}
-          <div className="absolute inset-0 flex items-end">
-            <div className="mx-auto w-full max-w-content px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="w-full bg-gradient-to-b from-navy via-navy to-navy-soft">
+          <div className="mx-auto flex max-w-content flex-col items-center gap-8 px-4 py-10 sm:flex-row sm:gap-10 sm:px-6 sm:py-14 lg:gap-14 lg:px-8">
+            <div className="w-full max-w-[236px] shrink-0 sm:max-w-[264px] lg:max-w-[320px]">
+              <div className="relative aspect-[1414/2000] overflow-hidden rounded-2xl bg-navy-soft shadow-glow ring-1 ring-white/15">
+                <Image
+                  src={sermon.posterImage!}
+                  alt={`Sunday message poster for ${formatDate(sermon.date)}`}
+                  fill
+                  priority
+                  className="object-contain"
+                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 264px, 236px"
+                />
+              </div>
+            </div>
+            <div className="w-full text-center sm:text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
                 {formatDate(sermon.date)} — {sermon.preacher}
               </p>
-              <h1 className="mt-3 max-w-3xl text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 {sermon.title}
               </h1>
-              <p className="mt-2 text-base font-medium text-white/80">{sermon.passage}</p>
+              <p className="mt-3 text-base font-medium text-amber-300">{sermon.passage}</p>
+              {sermon.summary && (
+                <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/80 sm:mx-0">
+                  {sermon.summary}
+                </p>
+              )}
             </div>
           </div>
         </div>
