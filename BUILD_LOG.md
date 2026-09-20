@@ -121,7 +121,7 @@
 - [ ] Review sermon notes for accuracy (content was drafted as placeholder)
 
 ### Deployment
-- [ ] Push to GitHub (create repo if not done)
+- [x] Push to GitHub (create repo if not done)
 - [ ] Deploy to Vercel (connect GitHub repo)
 - [ ] Share Vercel preview link with Bro. Marc for review
 - [ ] Purchase custom domain
