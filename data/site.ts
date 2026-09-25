@@ -1,3 +1,11 @@
+/**
+ * The canonical public origin. Every absolute URL on the site — metadata, Open Graph
+ * images, JSON-LD, the sitemap and robots.txt — must be built from this one constant.
+ * Four files previously hardcoded their own, and two still pointed at a retired
+ * preview domain, which silently broke every shared sermon's preview image.
+ */
+export const SITE_URL = 'https://www.acts242churchofchrist.com'
+
 export const siteConfig = {
   churchName: 'Acts 242',
   fullChurchName: 'Acts 242 Church of Christ',
@@ -33,6 +41,15 @@ export const siteConfig = {
   // Service schedule
   serviceHours: [
     { day: 'Sunday', time: '10:00 AM – 12:30 PM', description: 'Sunday Worship Service' },
-    { day: 'Friday', time: '5:30 PM – 7:30 PM', description: 'Midweek Devotional' },
+    { day: 'Friday', time: '6:00 PM – 8:00 PM', description: 'Midweek Devotional' },
   ],
 }
+
+/**
+ * Prose form of the schedule — "every Sunday at 10:00 AM and every Friday at 6:00 PM".
+ * Pages render this instead of spelling the times out, so changing serviceHours above
+ * can never leave a stale time behind in body copy.
+ */
+export const liveScheduleSentence = siteConfig.serviceHours
+  .map((s) => `every ${s.day} at ${s.time.split(/[–-]/)[0].trim()}`)
+  .join(' and ')
