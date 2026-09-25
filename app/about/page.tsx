@@ -8,6 +8,7 @@ import { LeaderAvatar } from '@/components/ui/leader-avatar'
 import { siteConfig } from '@/data/site'
 import { missionVision } from '@/data/mission-vision'
 import { coreLeadership, extendedTeam } from '@/data/leadership'
+import { ministries } from '@/data/ministries'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -301,7 +302,42 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ── 8. Location ── */}
+      {/* ── 8. Ministries ── */}
+      <Section className="bg-muted dark:bg-slate-900">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+          What we do
+        </p>
+        <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground dark:text-slate-100">
+          Our ministries
+        </h2>
+
+        <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+          {ministries.map((ministry) => (
+            <div
+              key={ministry.name}
+              className="rounded-2xl border border-border bg-white p-5 dark:border-slate-700 dark:bg-slate-800"
+            >
+              <dt className="font-semibold text-foreground dark:text-slate-100">{ministry.name}</dt>
+              <dd className="mt-1 text-sm leading-7 text-text-soft dark:text-slate-400">
+                {ministry.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <p className="mt-8 text-sm leading-7 text-text-soft dark:text-slate-400">
+          Want to see these ministries at work?{' '}
+          <Link
+            href="/milestones"
+            className="font-semibold text-navy underline underline-offset-4 dark:text-amber-300"
+          >
+            Browse our milestones
+          </Link>{' '}
+          for a month-by-month record of the past season.
+        </p>
+      </Section>
+
+      {/* ── 9. Location ── */}
       <Section className="bg-muted dark:bg-slate-900">
         <div className="rounded-3xl border border-border bg-white p-8 md:p-10 dark:border-slate-700 dark:bg-slate-800">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Location</p>

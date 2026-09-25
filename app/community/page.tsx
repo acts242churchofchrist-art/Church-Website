@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { testimonies } from '@/data/testimonies'
-import { galleryAlbums } from '@/data/gallery'
+import { publishedAlbums } from '@/data/gallery'
 
 export const metadata: Metadata = {
   title: 'Community',
@@ -29,7 +29,7 @@ function formatDate(iso: string) {
   })
 }
 
-const sortedAlbums = [...galleryAlbums].sort(
+const sortedAlbums = [...publishedAlbums].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 )
 

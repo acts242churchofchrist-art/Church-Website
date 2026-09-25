@@ -1,12 +1,15 @@
+import Link from 'next/link'
 import {
   recurringEvents,
   datedEvents,
-  comingSoonEvents,
+  ministryRhythms,
   upcomingPreachingSchedule,
+  preachingScheduleLabel,
   eventTypeColors,
   eventTypeLabels,
   type ChurchEvent,
 } from '@/data/events'
+import { siteConfig } from '@/data/site'
 import { Section } from '@/components/layout/section'
 
 function formatEventDate(dateStr: string) {
@@ -98,7 +101,7 @@ export function UpcomingEvents() {
   if (recurringEvents.length === 0 && datedEvents.length === 0) return null
 
   return (
-    <Section>
+    <Section id="events">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
           What&apos;s coming up
@@ -111,14 +114,12 @@ export function UpcomingEvents() {
         </p>
       </div>
 
-      {/* Recurring events — Sunday service only */}
-      {recurringEvents.filter((e) => e.id === 'sunday-service-weekly').length > 0 && (
+      {/* Recurring events — the weekly gatherings anyone can turn up to */}
+      {recurringEvents.length > 0 && (
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {recurringEvents
-            .filter((e) => e.id === 'sunday-service-weekly')
-            .map((event) => (
-              <RecurringEventCard key={event.id} event={event} />
-            ))}
+          {recurringEvents.map((event) => (
+            <RecurringEventCard key={event.id} event={event} />
+          ))}
         </div>
       )}
 
@@ -127,7 +128,7 @@ export function UpcomingEvents() {
         <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-muted dark:border-slate-700 dark:bg-slate-900">
           <div className="border-b border-border px-5 py-3 dark:border-slate-700">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
-              June Preaching Schedule
+              {preachingScheduleLabel}
             </p>
           </div>
           <div className="divide-y divide-border dark:divide-slate-700">
@@ -149,52 +150,70 @@ export function UpcomingEvents() {
         </div>
       )}
 
-      {/* Dated activities */}
-      {(datedEvents.length > 0 || comingSoonEvents.length > 0) && (
+      {/* Dated activities — only ever rendered when a real date exists */}
+      {datedEvents.length > 0 && (
         <div className="mt-12">
           <h3 className="text-xl font-semibold text-foreground dark:text-slate-100">
             Upcoming activities
           </h3>
-          {datedEvents.length > 0 && (
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {datedEvents.slice(0, 4).map((event) => (
-                <DatedEventCard key={event.id} event={event} />
-              ))}
-            </div>
-          )}
-
-          {/* Coming soon events — no specific date yet */}
-          {comingSoonEvents.length > 0 && (
-            <div className="mt-6 border-t border-border pt-6 dark:border-slate-700">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-text-soft dark:text-slate-400">
-                Also coming — dates to be announced
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {comingSoonEvents.map((event) => (
-                  <div
-                    key={event.id}
-                    className="rounded-2xl border border-border bg-muted px-4 py-3 dark:border-slate-700 dark:bg-slate-800"
-                  >
-                    {event.ministry && (
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-navy/60 dark:text-amber-300/60">
-                        {event.ministry}
-                      </p>
-                    )}
-                    <p className="text-sm font-semibold text-foreground dark:text-slate-100">
-                      {event.title}
-                    </p>
-                    {event.description && (
-                      <p className="mt-1 text-xs text-text-soft dark:text-slate-400">
-                        {event.description}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {datedEvents.slice(0, 4).map((event) => (
+              <DatedEventCard key={event.id} event={event} />
+            ))}
+          </div>
         </div>
       )}
+
+      {/* Ministry rhythms — true all year, so this block never goes stale */}
+      {ministryRhythms.length > 0 && (
+        <div className="mt-12">
+          <h3 className="text-xl font-semibold text-foreground dark:text-slate-100">
+            Monthly rhythms
+          </h3>
+          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+            {ministryRhythms.map((rhythm) => (
+              <div
+                key={rhythm.ministry}
+                className="rounded-2xl border border-border bg-muted px-4 py-3 dark:border-slate-700 dark:bg-slate-800"
+              >
+                <dt className="text-sm font-semibold text-foreground dark:text-slate-100">
+                  {rhythm.ministry}
+                </dt>
+                <dd className="mt-1 text-sm text-text-soft dark:text-slate-400">{rhythm.cadence}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+
+      <p className="mt-8 rounded-2xl border border-border bg-white px-5 py-4 text-sm leading-7 text-text-soft dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400">
+        <span className="font-semibold text-foreground dark:text-slate-100">
+          Dated activities are announced on Facebook and during Sunday service.
+        </span>{' '}
+        For the latest,{' '}
+        <a
+          href={siteConfig.facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-navy underline underline-offset-4 dark:text-amber-300"
+        >
+          follow us on Facebook
+        </a>{' '}
+        or ask any of the team on a Sunday.
+      </p>
+
+      <div className="mt-6 rounded-2xl border border-border bg-muted px-5 py-4 dark:border-slate-700 dark:bg-slate-900">
+        <p className="text-sm leading-7 text-text-soft dark:text-slate-400">
+          <span className="font-semibold text-foreground dark:text-slate-100">Looking back?</span>{' '}
+          See what God has done through this church over the past months.
+        </p>
+        <Link
+          href="/milestones"
+          className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-navy underline-offset-4 hover:underline dark:text-amber-300"
+        >
+          View our milestones →
+        </Link>
+      </div>
     </Section>
   )
 }

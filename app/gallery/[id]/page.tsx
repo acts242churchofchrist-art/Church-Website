@@ -3,20 +3,20 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { Section } from '@/components/layout/section'
-import { galleryAlbums } from '@/data/gallery'
+import { publishedAlbums } from '@/data/gallery'
 
 type Props = { params: Promise<{ id: string }> }
 
 export async function generateStaticParams() {
-  return galleryAlbums.map((a) => ({ id: a.id }))
+  return publishedAlbums.map((a) => ({ id: a.id }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params
-  const album = galleryAlbums.find((a) => a.id === id)
+  const album = publishedAlbums.find((a) => a.id === id)
   if (!album) return {}
   return {
-    title: `${album.title} | Acts 242 Gallery`,
+    title: `${album.title} — Gallery`,
     description: album.description,
   }
 }
@@ -31,7 +31,7 @@ function formatDate(iso: string) {
 
 export default async function GalleryAlbumPage({ params }: Props) {
   const { id } = await params
-  const album = galleryAlbums.find((a) => a.id === id)
+  const album = publishedAlbums.find((a) => a.id === id)
   if (!album) notFound()
 
   const cover = album.photos.find((p) => p.featured) ?? album.photos[0]

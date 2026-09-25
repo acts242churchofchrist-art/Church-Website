@@ -12,9 +12,9 @@ import { ThisSundayBanner } from '@/components/sections/this-sunday-banner'
 import { StatsRow } from '@/components/sections/stats-row'
 import { UpcomingEvents } from '@/components/sections/upcoming-events'
 import { testimonies } from '@/data/testimonies'
-import { galleryAlbums } from '@/data/gallery'
+import { publishedAlbums } from '@/data/gallery'
 
-const latestAlbum = [...galleryAlbums].sort(
+const latestAlbum = [...publishedAlbums].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 )[0]
 const featuredGalleryPhotos = latestAlbum?.photos.filter((p) => p.featured).slice(0, 3) ?? []
