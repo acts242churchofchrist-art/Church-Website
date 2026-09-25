@@ -13,7 +13,7 @@ export default function WaterBaptismPage() {
           actions={
             <>
               <ButtonLink href="/connect">Talk to a pastor</ButtonLink>
-              <ButtonLink href="/grow#discipleship" variant="secondary">
+              <ButtonLink href="/grow#foundations" variant="secondary">
                 Back to discipleship
               </ButtonLink>
             </>
@@ -72,7 +72,7 @@ export default function WaterBaptismPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <ButtonLink href="/connect">Talk to a pastor</ButtonLink>
-            <ButtonLink href="/discipleship/discipleship" variant="secondary">
+            <ButtonLink href="/discipleship/light-and-darkness" variant="secondary">
               Review Lesson 5
             </ButtonLink>
           </div>

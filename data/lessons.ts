@@ -10,6 +10,10 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'seeking-god',
     title: 'Seeking God',
+    subtitle: "Pursuing a Relationship with God with All Your Heart",
+    arcLine: "Whether you are pursuing God at all.",
+    sourcePages: '2-17',
+    edgeColour: '#0B2E63',
     summary:
       'Every person is searching for something. This lesson helps you understand what it truly means to seek God, and how that decision can change your life.',
     purpose:
@@ -67,6 +71,10 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'word-of-god',
     title: 'Word of God',
+    subtitle: "Making the Bible Your Standard for Life",
+    arcLine: "What decides truth once you begin.",
+    sourcePages: '19-31',
+    edgeColour: '#123F72',
     summary:
       'Every person lives by a standard. This lesson helps you build conviction about the Bible as the Word of God and make it your standard for life.',
     purpose:
@@ -124,6 +132,10 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'discipleship',
     title: 'Discipleship',
+    subtitle: "Following Jesus with Commitment and Obedience",
+    arcLine: "What following Him actually costs.",
+    sourcePages: '33-47',
+    edgeColour: '#0F5570',
     summary:
       'Jesus did not only call people to believe in Him. He called them to follow Him. Discipleship is a life of surrender, obedience, love, and growth.',
     purpose:
@@ -181,6 +193,10 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'kingdom-of-god',
     title: 'Kingdom of God',
+    subtitle: "Knowing God's Rule, God's People, and God's Purpose",
+    arcLine: "Whose rule you are living under.",
+    sourcePages: '49-64',
+    edgeColour: '#1D4E8F',
     summary:
       "The Kingdom of God is about God's rule, God's reign, and God's authority. This lesson helps you understand what it means to enter and live in it.",
     purpose:
@@ -238,10 +254,14 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'light-and-darkness',
     title: 'Light and Darkness',
+    subtitle: "Understanding the plan of salvation, and where you stand in it.",
+    arcLine: "How a person is saved, and when.",
+    sourcePages: '66-86',
+    edgeColour: '#03194C',
     summary:
       'The Bible teaches that without Christ, people remain in darkness because of sin. But God, in His mercy, calls people out of darkness and into His marvelous light.',
     purpose:
-      "To understand God's plan of salvation and what it means to move from darkness into light.",
+      "To understand the Plan of Salvation — what separates a person from God, what God has done about it, and how a person responds.",
     mainQuestion:
       'What separates people from God? How can a person truly be saved?',
     explanation:
@@ -295,10 +315,14 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'church',
     title: 'Church',
+    subtitle: "Understanding God's Heart for His Church",
+    arcLine: "The people you are saved into.",
+    sourcePages: '88-103',
+    edgeColour: '#1E4A5E',
     summary:
       "The Church is the Body of Christ. This lesson helps you understand how God values His Church, your place in it, and how to function as part of God's household.",
     purpose:
-      "To gain a deeper understanding of how God values His Church and His wonderful plans for Her, and to know how we must function as part of God's household.",
+      "To gain a deeper understanding of how God values His Church and His wonderful plans for her, and to know how we must function as part of God's household.",
     mainQuestion:
       'When you hear the word Church, what comes into your mind? How do you see yourself in the Body of Christ?',
     explanation:
@@ -385,10 +409,14 @@ export const lessons: Lesson[] = [
     videoUrl: '',
     slug: 'cross',
     title: 'Cross',
+    subtitle: "Learning to Hate Sin and Love God Through Jesus' Sacrifice",
+    arcLine: "What it cost Him, and what you owe.",
+    sourcePages: '105-125',
+    edgeColour: '#5E4415',
     summary:
       'The Cross is the foundation of Christianity. This lesson helps you hate sin, love God, and respond to the sacrifice Jesus made for you.',
     purpose:
-      "To hate sin and love God because we appreciate Jesus' sacrifice on the Cross.",
+      "To hate sin and love God because we appreciate Jesus' sacrifice.",
     mainQuestion:
       "How would you define sacrifice? Who would you die for? Do you truly understand what Jesus endured for you?",
     explanation:

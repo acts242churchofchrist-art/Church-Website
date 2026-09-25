@@ -12,6 +12,14 @@ export type Lesson = {
   lessonNumber: number
   slug: string
   title: string
+  /** Full subtitle from the lesson divider in the Foundation Guide. */
+  subtitle: string
+  /** One-line hook from the guide's "The Arc" page — for compact contexts. */
+  arcLine: string
+  /** Lesson content page range in the printed guide, excluding the divider. */
+  sourcePages: string
+  /** The lesson's page-edge tone in the guide, so web and print read as one family. */
+  edgeColour: string
   summary: string
   purpose: string
   mainQuestion: string
@@ -27,12 +35,18 @@ export type Lesson = {
   transcript?: string
 }
 
-export type MaterialCategory = 'Foundation and Discipleship' | 'Sermon Materials' | 'Evangelism Materials'
+export type MaterialCategory =
+  | 'Foundation and Discipleship'
+  | 'Teaching Series'
+  | 'Sermon Materials'
+  | 'Evangelism Materials'
 
 export type MaterialItem = {
   id: string
   title: string
   description: string
+  /** Short spec line, e.g. "Edition 1 (2026) · 140 pages · PDF". */
+  meta?: string
   category: MaterialCategory
   featured?: boolean
   actionLabel: string
