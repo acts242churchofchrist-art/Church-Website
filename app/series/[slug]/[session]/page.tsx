@@ -3,7 +3,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
+import { ImageSlideDeck } from '@/components/sections/image-slide-deck'
 import { teachingSeries, getSession } from '@/data/series'
+import { seriesDecks } from '@/data/series-decks.generated'
 
 type Props = { params: Promise<{ slug: string; session: string }> }
 
@@ -36,6 +38,7 @@ export default async function SessionPage({ params }: Props) {
   const found = getSession(slug, sessionSlug)
   if (!found) notFound()
   const { series, session, previous, next } = found
+  const slides = seriesDecks[session.sessionSlug] ?? []
 
   return (
     <>
@@ -65,14 +68,22 @@ export default async function SessionPage({ params }: Props) {
 
           <div className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-soft dark:text-slate-400">
             {session.date && <span>{formatDate(session.date)}</span>}
-            {session.sourcePages && (
+            {session.teacher && (
               <>
                 {session.date && (
                   <span aria-hidden className="hidden sm:inline">
                     ·
                   </span>
                 )}
-                <span>Foundation deck pp.&nbsp;{session.sourcePages.replace('-', '–')}</span>
+                <span>Taught by {session.teacher}</span>
+              </>
+            )}
+            {slides.length > 0 && (
+              <>
+                <span aria-hidden className="hidden sm:inline">
+                  ·
+                </span>
+                <span>{slides.length} slides</span>
               </>
             )}
           </div>
@@ -177,6 +188,20 @@ export default async function SessionPage({ params }: Props) {
           )}
         </div>
       </Section>
+
+      {/* ── The deck as it was taught ── */}
+      {slides.length > 0 && (
+        <Section className="pt-0">
+          <div className="mx-auto max-w-3xl">
+            <ImageSlideDeck
+              slides={slides}
+              folder={session.sessionSlug}
+              id={`deck-${session.sessionSlug}`}
+              title={session.title}
+            />
+          </div>
+        </Section>
+      )}
 
       {/* ── Pastoral care note — always before the download ── */}
       <Section className="bg-muted dark:bg-slate-900">

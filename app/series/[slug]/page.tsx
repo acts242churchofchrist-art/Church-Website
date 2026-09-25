@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { teachingSeries, getSeriesBySlug } from '@/data/series'
+import { seriesDecks } from '@/data/series-decks.generated'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -119,6 +120,19 @@ export default async function SeriesPage({ params }: Props) {
                   )}
                   <p className="mt-2 text-base leading-7 text-text-soft dark:text-slate-400">
                     {session.focus}
+                  </p>
+                  {/* Says up front that there is something to read, rather than making
+                      someone open six sessions to find out. */}
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-navy/70 dark:text-amber-300/70">
+                    {[
+                      session.body?.length ? 'Full notes' : null,
+                      seriesDecks[session.sessionSlug]?.length
+                        ? `${seriesDecks[session.sessionSlug].length} slides`
+                        : null,
+                      session.pdfUrl ? 'PDF' : null,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
                   </p>
                 </div>
               </li>

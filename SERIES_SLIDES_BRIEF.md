@@ -15,6 +15,12 @@ Six teaching sessions from **Inner Healing 202: Trauma** (May – August 2026) n
 
 The source material is six presentation decks, 7–30 MB each, not yet supplied to the repo.
 
+> **Status, 26 September 2026 — done.** The six decks were supplied and are now live.
+> `scripts/extract-series-decks.mjs` renders each slide to WebP and rebuilds a compressed
+> take-home PDF; the written notes in `data/series.ts` were transcribed from the deck text.
+> 78 slides, 90 MB of source reduced to 11 MB committed. The sources themselves stay out
+> of the repo — re-run the script against them to refresh.
+
 **Why HTML and not the decks themselves:** the congregation reads on phones, usually inside the Facebook in-app browser, which frequently refuses to render PDFs inline and hands them off to a download or an external app instead. A 16:9 slide in a 375 px portrait viewport is also unreadable without pinch-zooming every page. HTML reflows, weighs kilobytes instead of megabytes, is deep-linkable, and its text is selectable, searchable and screen-reader accessible.
 
 **The PDF keeps a real job:** printing, handing out, and reading offline. It is not the in-app experience.

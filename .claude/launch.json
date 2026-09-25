@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start"],
       "port": 3100
+    },
+    {
+      "name": "next-dev-alt",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev", "-p", "3102"],
+      "port": 3102
     }
   ]
 }
