@@ -108,6 +108,56 @@
 
 ---
 
+## Performance baseline
+
+Lighthouse, mobile preset, against a production build (`npm run build && npm run start`).
+Measured on `/sermons` — the heaviest page, and the one that grows every week.
+
+| Date | Page | Perf | A11y | Best Practices | SEO |
+| --- | --- | --- | --- | --- | --- |
+| 2026-09-18 | /sermons (before contrast fixes) | 96 | 96 | 96 | 100 |
+| 2026-09-18 | /sermons (after) | 99 | **100** | 96 | 100 |
+
+FCP 1.6s · LCP 1.6s · TBT 40ms · CLS 0
+
+The accessibility gain is attributable: the first run found 3 dark-mode contrast failures at
+12px (footer legal links, and the "(Google Drive)" note inside download pills), all now fixed,
+taking `color-contrast` to zero failures.
+
+Open items this run surfaced, largest first:
+- **~1,818 KiB of oversized images.** Even after `next/image` optimisation the sermon posters
+  cost 434–756 KiB each at `w=750`, because the source PNGs are 4+ MB. 76 files in `/public`
+  exceed 300 KB. Downscaling the sources is the single biggest remaining win.
+  Partly addressed: the sermon hero now requests the poster at 236–320 CSS px instead of
+  `sizes="100vw"`, so it resolves to `w=640` rather than `w=828`/`w=1920`. The sources are
+  untouched — 23 posters, median 640 KB, three of them over 4 MB. They are also inconsistent:
+  most have been run through TinyPNG down to a 22-colour dithered palette, three are still
+  full truecolor. Dithered noise is high-frequency, so it compresses *worse* into AVIF/WebP
+  than the truecolor original would — palettizing the sources is not automatically a win.
+- The live YouTube iframe loads eagerly; a click-to-play facade would defer it.
+
+**Measuring gotcha:** run the production server on a freshly built `.next`. If an older
+`next start` still holds port 3100 it keeps serving a stale HTML/CSS hash pair, the stylesheet
+404/400s, every link falls back to the UA default blue, and Lighthouse reports ~114 phantom
+contrast failures. Confirm the `/_next/static/css/*.css` href returns 200 before trusting a run.
+
+**Dev-server gotcha:** `npm run build` writes the same `.next` directory a running `next dev`
+is serving from, so every route starts returning 500 the moment the build finishes. Stop the
+dev server before building, and restart it afterwards.
+
+**Contrast-sweep gotcha:** a gradient lives in `background-image`, not `background-color`, so
+walking up the tree looking only at `background-color` sails straight past the navy sermon hero
+and measures its white text against the page's white — four phantom failures at ratio 1.0.
+Read the gradient's colour stops and score the text against the worst of them.
+
+Re-run after any change to image assets or the sermons page:
+
+```
+npx --yes lighthouse@12 http://localhost:3100/sermons --preset=perf --form-factor=mobile \
+  --screenEmulation.mobile --only-categories=performance,accessibility,best-practices,seo \
+  --chrome-flags="--headless=new" --output=json --output-path=/tmp/lh.json --quiet
+```
+
 ## Post-Build Checklist (for user)
 
 ### Before going live
