@@ -14,6 +14,7 @@ const navItems = [
   { href: '/about', label: 'About' },
   { href: '/sermons', label: 'Sermons' },
   { href: '/community', label: 'Community' },
+  { href: '/milestones', label: 'Milestones' },
   { href: '/grow', label: 'Grow' },
   { href: '/connect', label: 'Connect' },
 ]
@@ -53,14 +54,15 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
               className={`text-sm font-medium transition ${
                 isActive(item.href)
-                  ? 'font-semibold text-navy dark:text-amber-300'
+                  ? 'font-semibold text-navy underline decoration-2 underline-offset-8 dark:text-amber-300'
                   : 'text-foreground hover:text-navy dark:text-slate-300 dark:hover:text-amber-300'
               }`}
             >
@@ -80,7 +82,8 @@ export function Header() {
         </div>
 
         <button
-          className="flex flex-col items-center justify-center gap-1.5 rounded-lg p-2 text-navy dark:text-slate-200 md:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-lg text-navy dark:text-slate-200 md:hidden"
+          aria-controls="mobile-nav"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -93,15 +96,16 @@ export function Header() {
 
       {menuOpen && (
         <div className="absolute left-0 right-0 top-full border-b border-border bg-white shadow-calm dark:border-slate-800 dark:bg-slate-950 md:hidden">
-          <nav className="mx-auto flex flex-col px-4 pb-4 pt-2 sm:px-6">
+          <nav id="mobile-nav" aria-label="Mobile" className="mx-auto flex flex-col px-4 pb-4 pt-2 sm:px-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
+                aria-current={isActive(item.href) ? 'page' : undefined}
                 className={`border-b border-border py-3 text-sm font-medium last:border-0 dark:border-slate-800 ${
                   isActive(item.href)
-                    ? 'font-semibold text-navy dark:text-amber-300'
+                    ? 'font-semibold text-navy underline decoration-2 underline-offset-8 dark:text-amber-300'
                     : 'text-foreground hover:text-navy dark:text-slate-300 dark:hover:text-amber-300'
                 }`}
               >

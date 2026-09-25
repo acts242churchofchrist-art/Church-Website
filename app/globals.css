@@ -4,6 +4,18 @@
 
 :root {
   color-scheme: light;
+  /* Height of the sticky site header. Anything that sticks beneath it, or that an
+     anchor link scrolls to, offsets by this so content never lands underneath.
+     Taller on mobile: the hamburger is h-11 (44px) for the touch-target minimum,
+     which exceeds the h-10 logo and grows the row. */
+  --header-h: 69px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* The hamburger is md:hidden, so the h-10 logo sets the height from here up. */
+    --header-h: 65px;
+  }
 }
 
 .dark {
@@ -12,6 +24,35 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anchor targets (including the /live, /midweek and #gallery redirect landings)
+     otherwise come to rest underneath the sticky header. */
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+/* One designed focus ring for every interactive element — the codebase previously had
+   none, leaving keyboard users with only the browser default. */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid #102544;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.dark :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline-color: #fcd34d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -25,7 +66,8 @@ body {
 }
 
 /* Sermon prose dark variants */
-.dark .sermon-prose h2 {
+.dark .sermon-prose h2,
+.dark .sermon-prose h3 {
   color: #f1f5f9;
 }
 
@@ -66,6 +108,15 @@ a {
   color: #0f172a;
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
+}
+
+.sermon-prose h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .sermon-prose p {
@@ -110,4 +161,156 @@ a {
 .sermon-prose hr {
   border-color: #e2e8f0;
   margin: 2rem 0;
+}
+
+/* Slide deck stage.
+   Slides are authored on a fixed 1920x1080 stage. The extractor rewrites their px
+   values as a fraction of that width in `cqw`, so the stage below is the container they
+   resolve against and the whole slide scales declaratively — no transform, no resize
+   observer, correct at every viewport. */
+.deck-stage {
+  container-type: inline-size;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.deck-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The deck's fonts, in one place.
+   The exports hardcoded Archivo / Source Sans 3 / Source Serif 4 from the Google CDN,
+   which `style-src 'self'` and `font-src 'self'` block. The extractor rewrites all ~800
+   inline declarations to these variables, so matching the printed decks exactly is a
+   three-line change here once the faces are self-hosted through next/font.
+   Real stacks, not placeholder names: an undefined var() would invalidate the whole
+   font-family declaration rather than falling through. */
+:root {
+  --deck-display: system-ui;
+  --deck-sans: system-ui;
+  --deck-serif: Georgia;
+}
+
+/* Hide the scrollbar on the slide rail without disabling scrolling — swipe and the
+   arrow buttons are the intended affordances. */
+.deck-scroller {
+  scrollbar-width: none;
+}
+
+.deck-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scripture signature.
+   Scripture is the most important content type on this site and previously looked the
+   same as commentary. This gives it a face, a ground and a rule of its own.
+
+   The serif is a system stack on purpose: no webfont payload for a mobile-on-cellular
+   audience, and no CSP exemption (style-src/font-src are both 'self'). If a real
+   display serif is ever wanted it must be self-hosted through next/font. */
+.scripture {
+  --gold: #c39a38;
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  background: #faf7f0;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.dark .scripture {
+  background: #1e293b;
+}
+
+.scripture p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #0f172a;
+  margin: 0;
+}
+
+.dark .scripture p {
+  color: #e2e8f0;
+}
+
+.scripture cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: inherit;
+  font-style: normal;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  /* Darker than the gold rule itself: the rule is decoration, this is text and has to
+     clear AA on the cream ground with margin to spare. */
+  color: #6f5417;
+}
+
+.dark .scripture cite {
+  color: var(--gold);
+}
+
+/* Printing. The discipleship lessons exist as a printed booklet and the pages say so,
+   so sermon notes and lessons genuinely get printed.
+
+   Everything here needs !important: this file compiles BEFORE the Tailwind utilities,
+   and `dark:bg-slate-950` on <body> (app/layout.tsx) is a (0,2,0) selector that would
+   otherwise beat `.dark body` at (0,1,1) — so a page printed in dark mode would come
+   out with a near-black background. */
+@media print {
+  header,
+  footer,
+  nav,
+  iframe,
+  video,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Decorative gradients drop out in print, which would leave white text on white
+     paper. Forcing every element back to black-on-transparent avoids that. */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    background-image: none !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body,
+  .dark body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+  }
+
+  /* Reading URLs matters for the sermon body, where links carry the references —
+     but not for nav-style links elsewhere, which would print as noise. */
+  .sermon-prose a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .sermon-prose h2,
+  .sermon-prose h3 {
+    break-after: avoid;
+  }
+
+  .sermon-prose blockquote,
+  .sermon-prose li,
+  img {
+    break-inside: avoid;
+  }
+
+  @page {
+    margin: 18mm;
+  }
 }

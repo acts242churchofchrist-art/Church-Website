@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Display serif for headings. Body copy stays on the system sans stack.
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+      },
       colors: {
         background: '#FFFFFF',
         foreground: '#0F172A',
@@ -17,6 +21,15 @@ const config: Config = {
         muted: '#F8FAFC',
         border: '#E2E8F0',
         'text-soft': '#475569',
+        // Warm ground for the Grow page and the Foundation Guide surfaces. Matches the
+        // printed guide's cream so web and print read as one family.
+        cream: '#FBF8F3',
+        'cream-deep': '#F7F3EC',
+        'cream-border': '#E6E0D6',
+        gold: '#C39A38',
+        // The bright gold is a rule/accent colour: as 14px text on cream it measures
+        // 2.48:1, well under AA. This darker gold is the text counterpart (6.6:1).
+        'gold-ink': '#6F5417',
       },
       borderRadius: {
         xl2: '1rem',
