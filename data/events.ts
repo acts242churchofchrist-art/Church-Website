@@ -4,6 +4,9 @@
  * - Add new events for the coming weeks
  * - Recurring events (Sunday service, Friday devotional) are always shown — do not remove them
  * - Keep dated events to a maximum of 4–6 at a time
+ *
+ * Completed activities are not deleted — move them to data/milestones.ts so the
+ * season is preserved on /milestones instead of vanishing when the month ends.
  */
 
 export type ChurchEvent = {
@@ -33,63 +36,32 @@ export const upcomingEvents: ChurchEvent[] = [
     id: 'midweek-devotional-weekly',
     title: 'Midweek Devotional',
     date: '',
-    time: '5:30 PM – 7:30 PM',
+    time: '6:00 PM – 8:00 PM',
     location: 'Acts 242 Worship Hall',
     type: 'devotional',
     recurringLabel: 'Every Friday',
   },
 
-  // JUNE 2026 EVENTS
-  {
-    id: 'inner-healing-june-series',
-    title: 'Inner Healing Part 2: Trauma — Ongoing Series',
-    description: 'An 8-Sunday series on inner healing and trauma led by Sis. Karol, starting June 7. Additional dates will be announced.',
-    date: '2026-06-07',
-    time: '12:30 PM onwards',
-    location: 'Acts 242 Worship Hall',
-    type: 'special',
-    ministry: "Women's Ministry",
-  },
-  {
-    id: 'fathers-day-june21',
-    title: "Father's Day Service",
-    description: "A special Sunday service celebrating fathers, featuring a guest testimony and a Kids presentation. Men's Fellowship with refreshments after the service.",
-    date: '2026-06-21',
-    time: '10:00 AM',
-    location: 'Acts 242 Worship Hall',
-    type: 'special',
-    ministry: "Men's Ministry & Kids",
-  },
-  {
-    id: 'mens-fathers-day-fellowship',
-    title: "Men's Fellowship — Father's Day",
-    description: "A Men's Brotherhood gathering with refreshments after the Father's Day service.",
-    date: '2026-06-21',
-    time: '12:30 PM onwards',
-    location: 'Acts 242 Worship Hall',
-    type: 'fellowship',
-    ministry: "Men's Ministry",
-  },
-  {
-    id: 'evangelism-scouting-june',
-    title: 'Evangelism Outreach — Coming Soon',
-    description: 'The church is scouting Manila Memorial Park and other locations for an upcoming evangelism activity. Date to be announced.',
-    date: '', // no date yet — treat as a special "coming soon" event
-    time: 'To be announced',
-    location: 'To be announced',
-    type: 'outreach',
-    ministry: 'Evangelism',
-  },
-  {
-    id: 'single-mom-visitation-june',
-    title: 'Single Mom Ministry Visitation',
-    description: 'A ministry visit for single mothers in our congregation. Date to be announced.',
-    date: '',
-    time: 'To be announced',
-    location: 'To be announced',
-    type: 'fellowship',
-    ministry: "Women's Ministry",
-  },
+  // DATED EVENTS — add here once the core group sets a date.
+  // Past entries belong in data/milestones.ts, not here.
+]
+
+/**
+ * MINISTRY RHYTHMS — congregation-wide patterns that recur without a fixed date.
+ * These replace speculative "date to be announced" cards: they are true all year
+ * and never go stale, so the home page stays honest between planning meetings.
+ */
+export type MinistryRhythm = {
+  ministry: string
+  cadence: string
+}
+
+export const ministryRhythms: MinistryRhythm[] = [
+  { ministry: "Women's & Single Mom Ministry", cadence: 'Meets after Sunday worship' },
+  { ministry: 'Young Adults', cadence: "Men's and women's gatherings, monthly" },
+  { ministry: 'Marrieds', cadence: 'Monthly fellowship' },
+  { ministry: "Men's Ministry", cadence: 'Fellowship and sports' },
+  { ministry: "Children's Ministry", cadence: 'Presentations and youth services through the year' },
 ]
 
 // Recurring events (weekly, no date) — always shown
@@ -106,10 +78,9 @@ export const datedEvents = upcomingEvents
     return eventDate.getTime() >= Date.now()
   })
 
-// Coming soon events — no date yet, not recurring
-export const comingSoonEvents = upcomingEvents.filter(
-  (e) => !e.date && !e.id.includes('weekly')
-)
+// Undated "coming soon" events are deliberately not supported: they were the source
+// of months-stale cards on the home page. Use ministryRhythms for things that recur
+// without a date, and add a dated event only once a real date exists.
 
 export const eventTypeColors: Record<ChurchEvent['type'], string> = {
   service: 'bg-navy/10 text-navy dark:bg-amber-300/15 dark:text-amber-300',
@@ -135,17 +106,24 @@ export type PreacherEntry = {
   note?: string
 }
 
-export const preachingSchedule: PreacherEntry[] = [
-  { date: '2026-06-07', preacher: 'Bro. Marc', note: 'Sunday Service' },
-  { date: '2026-06-14', preacher: 'Bro. James', note: 'Sunday Service' },
-  { date: '2026-06-19', preacher: 'Bro. Kiev', note: 'Midweek Devotional' },
-  { date: '2026-06-21', preacher: 'Bro. Marc', note: "Father's Day Service" },
-  { date: '2026-06-26', preacher: 'Bro. Vince', note: 'Midweek Devotional' },
-  { date: '2026-06-28', preacher: 'Bro. Marc', note: 'Sunday Service' },
-]
+// Add the coming month's assignments after each planning meeting. Past entries are
+// filtered out automatically at build time, so stale rows never reach the page.
+export const preachingSchedule: PreacherEntry[] = []
 
 // Only show upcoming entries
 export const upcomingPreachingSchedule = preachingSchedule.filter((e) => {
   const d = new Date(e.date + 'T23:59:59')
   return d.getTime() >= Date.now()
 })
+
+// Heading label derived from the entries themselves, so it can never disagree with
+// the rows beneath it the way a hardcoded month name did.
+export const preachingScheduleLabel = (() => {
+  if (upcomingPreachingSchedule.length === 0) return ''
+  const months = upcomingPreachingSchedule.map((e) =>
+    new Date(e.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long' }),
+  )
+  const first = months[0]
+  const last = months[months.length - 1]
+  return first === last ? `${first} Preaching Schedule` : `${first}–${last} Preaching Schedule`
+})()

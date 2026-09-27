@@ -6,9 +6,8 @@ import { evaluate } from '@mdx-js/mdx'
 import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { getAllMidweek, getMidweekBySlug, getAdjacentMidweek } from '@/lib/midweek'
-import { siteConfig } from '@/data/site'
-
-const SITE_URL = 'https://www.acts242churchofchrist.com'
+import { youtubeEmbedUrl, facebookEmbedUrl, driveEmbedUrl } from '@/lib/embeds'
+import { siteConfig, SITE_URL } from '@/data/site'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -40,21 +39,6 @@ function formatDate(dateStr: string) {
     month: 'long',
     day: 'numeric',
   })
-}
-
-function youtubeEmbedUrl(url: string): string {
-  // Supports watch?v=, youtu.be/, /live/ (live stream), /embed/, and /shorts/ forms
-  const match = url.match(/(?:v=|youtu\.be\/|\/live\/|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)
-  return match ? `https://www.youtube.com/embed/${match[1]}` : url
-}
-
-function facebookEmbedUrl(url: string): string {
-  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560&height=315&appId`
-}
-
-function driveEmbedUrl(url: string): string {
-  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/)
-  return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url
 }
 
 export default async function MidweekMessagePage({ params }: Props) {
@@ -169,6 +153,7 @@ export default async function MidweekMessagePage({ params }: Props) {
             <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700" style={{ width: '100%', maxWidth: 420 }}>
               <iframe
                 src={facebookEmbedUrl(message.facebookUrl)}
+                title={message.title}
                 className="w-full"
                 style={{ aspectRatio: '9/16', border: 'none', overflow: 'hidden', display: 'block' }}
                 allowFullScreen
@@ -199,7 +184,7 @@ export default async function MidweekMessagePage({ params }: Props) {
       {/* ── 3. Devotional prose ── */}
       <Section>
         <div className="mx-auto max-w-3xl">
-          <article className="sermon-prose prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-navy prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-[1.85] prose-p:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-navy prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-text-soft prose-blockquote:not-italic prose-strong:text-foreground prose-strong:font-semibold prose-a:text-navy prose-a:no-underline hover:prose-a:underline dark:prose-invert">
+          <article className="sermon-prose prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-p:leading-[1.85] prose-p:text-foreground prose-blockquote:border-l-4 prose-blockquote:border-navy prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-text-soft prose-blockquote:not-italic prose-strong:text-foreground prose-strong:font-semibold prose-a:text-navy prose-a:no-underline hover:prose-a:underline dark:prose-invert">
             <MDXContent />
           </article>
         </div>
@@ -304,7 +289,7 @@ export default async function MidweekMessagePage({ params }: Props) {
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:bg-slate-800 dark:text-amber-300 dark:hover:bg-slate-700"
                 >
                   Download Slides ↗
-                  <span className="text-xs font-normal text-text-soft dark:text-slate-400">(Google Drive)</span>
+                  <span className="text-xs font-normal text-text-soft dark:text-slate-300">(Google Drive)</span>
                 </a>
               )}
               {message.posterImage && (

@@ -73,4 +73,97 @@ export const galleryAlbums: GalleryAlbum[] = [
       { filename: '691111572_1301299695522568_2071123769939332432_n.jpg', alt: 'Painting activity — May 10, 2026' },
     ],
   },
+
+  // ── Scaffolded albums ──────────────────────────────────────────────────────
+  // Metadata is ready; each one publishes itself the moment photos are added to
+  // `photos` and the matching folder under /public/images/gallery/ exists.
+  // Until then `publishedAlbums` filters them out, so no empty album can ship.
+  {
+    id: '2026-05-15-ice-cream-evangelism',
+    title: 'Ice Cream Evangelism',
+    date: '2026-05-15',
+    ministry: 'Evangelism',
+    description:
+      'The church took the gospel into the community with ice cream and hand-painted bookmarks — a simple, warm way to open a conversation about Christ.',
+    story:
+      'The bookmarks painted the Sunday before were handed out alongside ice cream, turning a small kindness into an open door for the gospel.',
+    folder: '/images/gallery/2026-05-15-ice-cream-evangelism',
+    photos: [],
+  },
+  {
+    id: '2026-05-31-mens-leadership-training',
+    title: "Men's Leadership Training",
+    date: '2026-05-31',
+    ministry: "Men's Ministry",
+    description: 'A training day for the men of the church — building the next layer of leadership.',
+    story:
+      'The men of Acts 242 gathered for a day of teaching and training, preparing to carry more of the work of the church.',
+    folder: '/images/gallery/2026-05-31-mens-leadership-training',
+    photos: [],
+  },
+  {
+    id: '2026-06-21-fathers-day-mens-bible-talk',
+    title: "Father's Day Men's Bible Talk",
+    date: '2026-06-21',
+    ministry: "Men's Ministry",
+    description:
+      "The men gathered for a Bible talk on Father's Day, with refreshments and time together.",
+    story:
+      "Father's Day was marked with a Bible talk for the men, followed by refreshments and fellowship.",
+    folder: '/images/gallery/2026-06-21-fathers-day-mens-bible-talk',
+    photos: [],
+  },
+  {
+    id: '2026-07-12-childrens-performance',
+    title: "Children's Ministry Performance",
+    date: '2026-07-12',
+    ministry: "Children's Ministry",
+    description:
+      "The children performed for the congregation, the fruit of weeks of preparation in the children's ministry.",
+    story:
+      'Weeks of practice came together as the children performed for the whole congregation.',
+    folder: '/images/gallery/2026-07-12-childrens-performance',
+    photos: [],
+  },
+  {
+    id: '2026-07-26-concert-worship-service',
+    title: 'Concert Worship Service',
+    date: '2026-07-26',
+    ministry: 'Worship',
+    description:
+      'A full Sunday given to worship — an extended service of singing and the Word together.',
+    story:
+      'The congregation gave a whole Sunday to worship, with extended singing alongside the preaching of the Word.',
+    folder: '/images/gallery/2026-07-26-concert-worship-service',
+    photos: [],
+  },
+  {
+    id: '2026-08-15-mens-basketball',
+    title: "Men's Basketball Fellowship",
+    date: '2026-08-15',
+    ministry: "Men's Ministry",
+    description:
+      'The men gathered for basketball — fellowship built on the court as much as in the pew.',
+    story: 'An afternoon of basketball gave the men time together outside the Sunday gathering.',
+    folder: '/images/gallery/2026-08-15-mens-basketball',
+    photos: [],
+  },
+  {
+    id: '2026-08-30-childrens-presentation-youth-service',
+    title: "Children's Presentation & Youth Service",
+    date: '2026-08-30',
+    ministry: 'Children & Youth',
+    description:
+      'The children led a presentation and the youth took the Sunday service — a Sunday shaped and carried by the next generation.',
+    story:
+      'The children presented and the youth led the service, carrying the Sunday from start to finish.',
+    folder: '/images/gallery/2026-08-30-childrens-presentation-youth-service',
+    photos: [],
+  },
 ]
+
+/**
+ * Albums that actually have photos. Every public surface renders this, never
+ * `galleryAlbums`, so a scaffolded album cannot appear as an empty gallery.
+ */
+export const publishedAlbums = galleryAlbums.filter((a) => a.photos.length > 0)

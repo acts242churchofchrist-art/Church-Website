@@ -7,7 +7,16 @@ export function Footer() {
       <div className="mx-auto grid max-w-content gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div>
           <p className="text-sm font-semibold text-navy dark:text-amber-300">{siteConfig.fullChurchName}</p>
-          <p className="mt-2 text-sm text-text-soft dark:text-slate-400">{siteConfig.address}</p>
+          {/* Explicit underline: the global `a { text-decoration: none }` would otherwise
+              leave this reading as plain text. */}
+          <a
+            href={siteConfig.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block text-sm text-text-soft underline underline-offset-4 hover:text-navy dark:text-slate-400 dark:hover:text-amber-300"
+          >
+            {siteConfig.address}
+          </a>
           <p className="mt-4 max-w-xl text-sm leading-7 text-text-soft dark:text-slate-400">
             {siteConfig.verseReference} — {siteConfig.verseText}
           </p>
@@ -17,13 +26,16 @@ export function Footer() {
           <a href={`mailto:${siteConfig.email}`} className="hover:text-navy dark:hover:text-amber-300">
             {siteConfig.email}
           </a>
-          <Link href={siteConfig.facebookUrl} target="_blank" className="hover:text-navy dark:hover:text-amber-300">
+          <Link href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-navy dark:hover:text-amber-300">
             Facebook
           </Link>
-          <Link href={siteConfig.youtubeUrl} target="_blank" className="hover:text-navy dark:hover:text-amber-300">
+          <Link href={siteConfig.youtubeUrl} target="_blank" rel="noopener noreferrer" className="hover:text-navy dark:hover:text-amber-300">
             YouTube
           </Link>
-          <div className="mt-4 flex gap-4 border-t border-border pt-4 text-xs text-text-soft dark:border-slate-800 dark:text-slate-500">
+          <Link href="/milestones" className="hover:text-navy dark:hover:text-amber-300">
+            Milestones
+          </Link>
+          <div className="mt-4 flex gap-4 border-t border-border pt-4 text-xs text-text-soft dark:border-slate-800 dark:text-slate-400">
             <Link href="/privacy-policy" className="hover:text-navy dark:hover:text-amber-300">
               Privacy Policy
             </Link>

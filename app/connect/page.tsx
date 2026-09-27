@@ -111,6 +111,26 @@ export default function ConnectPage() {
           </div>
         </div>
 
+        <div className="mt-6 rounded-3xl border border-border bg-white p-6 md:p-8 dark:border-slate-700 dark:bg-slate-800">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+            Join the team
+          </p>
+          <h2 className="mt-3 text-xl font-semibold text-foreground dark:text-slate-100">
+            Serve with us
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-text-soft dark:text-slate-400">
+            Every Sunday takes a team — ushers to welcome people at the door, song leaders, and hands
+            for audio and media. If you would like to serve, let us know and we will help you find
+            your place.
+          </p>
+          <a
+            href="#form"
+            className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition hover:gap-2 dark:text-amber-300"
+          >
+            Get in touch <span aria-hidden>→</span>
+          </a>
+        </div>
+
         <div className="mt-10">
           <SocialLinks />
         </div>

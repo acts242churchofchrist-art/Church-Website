@@ -7,7 +7,7 @@ import { CurrentWeekMaterialsCard } from '@/components/sections/current-week-mat
 import { getAllSermons } from '@/lib/sermons'
 import { getAllMidweek } from '@/lib/midweek'
 import { sermonArchive } from '@/data/sermon-archive'
-import { siteConfig } from '@/data/site'
+import { siteConfig, liveScheduleSentence } from '@/data/site'
 import type { SermonFrontmatter } from '@/types/content'
 
 export const metadata = {
@@ -68,9 +68,16 @@ function MessageCard({ message, basePath }: { message: SermonFrontmatter; basePa
   )
 }
 
+// Cards carry a full-width poster each, so on mobile every extra card is another
+// viewport-width image fetch on cellular. Cap the grid and list the rest as text links;
+// 12 also divides evenly into the 2- and 3-column grids, so no ragged last row.
+const RECENT_LIMIT = 12
+
 export default function SermonsPage() {
   const sermons = getAllSermons()
   const midweek = getAllMidweek()
+  const recentSermons = sermons.slice(0, RECENT_LIMIT)
+  const olderSermons = sermons.slice(RECENT_LIMIT)
 
   return (
     <>
@@ -89,7 +96,7 @@ export default function SermonsPage() {
               <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-white bg-clip-text text-transparent">in the Word.</span>
             </h1>
             <p className="mt-6 max-w-2xl animate-fade-up-delay-2 text-lg leading-8 text-white/85 sm:text-xl">
-              We go live every Sunday at 10:00 AM and every Friday at 5:30 PM. Browse Sunday sermons and midweek devotionals — each message is available to read, watch, and download.
+              We go live {liveScheduleSentence}. Browse Sunday sermons and midweek devotionals — each message is available to read, watch, and download.
             </p>
             <div className="mt-10 flex animate-fade-up-delay-3 flex-wrap gap-4">
               <a href="#live" className="inline-flex items-center justify-center rounded-full bg-amber-300 px-7 py-3 text-sm font-semibold text-navy shadow-glow transition hover:bg-amber-200">
@@ -103,8 +110,35 @@ export default function SermonsPage() {
         </div>
       </section>
 
+      {/* ── Section nav ── */}
+      {/* Jump links, not search. Plain anchors so it costs no JS and works in the
+          Facebook in-app browser. Sticks beneath the header, hence --header-h. */}
+      <div className="sticky top-[var(--header-h)] z-30 border-b border-border bg-white/95 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-950/95">
+        <nav
+          aria-label="Jump to section"
+          className="mx-auto flex max-w-content gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8"
+        >
+          {[
+            { href: '#live', label: 'Live' },
+            { href: '#sunday', label: 'Sunday' },
+            ...(olderSermons.length > 0 ? [{ href: '#all', label: 'All messages' }] : []),
+            // The midweek section only renders when there is midweek content.
+            ...(midweek.length > 0 ? [{ href: '#midweek', label: 'Midweek' }] : []),
+            { href: '#archive', label: 'Archive' },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="shrink-0 rounded-full border border-border px-4 py-2 text-sm font-semibold text-navy transition hover:bg-muted dark:border-slate-700 dark:text-amber-300 dark:hover:bg-slate-800"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
       {/* ── Live embed ── */}
-      <Section id="live" className="bg-muted dark:bg-slate-900">
+      <Section id="live" className="scroll-mt-16 bg-muted dark:bg-slate-900">
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Live</p>
@@ -128,7 +162,7 @@ export default function SermonsPage() {
         <div className="mt-4 rounded-2xl border border-border bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
           <p className="text-sm text-text-soft dark:text-slate-400">
             <span className="font-semibold text-foreground dark:text-slate-100">Not live right now?</span>{' '}
-            We go live every Sunday at 10:00 AM and Friday at 5:30 PM.{' '}
+            We go live {liveScheduleSentence}.{' '}
             <a
               href={siteConfig.youtubeUrl}
               target="_blank"
@@ -146,7 +180,7 @@ export default function SermonsPage() {
       </Section>
 
       {/* ── Sunday Sermons ── */}
-      <Section id="sunday">
+      <Section id="sunday" className="scroll-mt-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
@@ -175,16 +209,52 @@ export default function SermonsPage() {
           </div>
         ) : (
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {sermons.map((sermon) => (
+            {recentSermons.map((sermon) => (
               <MessageCard key={sermon.slug} message={sermon} basePath="/sermons" />
             ))}
           </div>
         )}
       </Section>
 
+      {/* ── Every other sermon, as text links ── */}
+      {olderSermons.length > 0 && (
+        <Section id="all" className="scroll-mt-16 bg-muted dark:bg-slate-900">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+            All messages
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">
+            Earlier this year
+          </h2>
+          <p className="mt-3 text-base text-text-soft dark:text-slate-400">
+            {olderSermons.length} more {olderSermons.length === 1 ? 'message' : 'messages'}, oldest
+            last.
+          </p>
+          <ul className="mt-8 divide-y divide-border dark:divide-slate-700">
+            {olderSermons.map((sermon) => (
+              <li key={sermon.slug}>
+                <Link
+                  href={`/sermons/${sermon.slug}`}
+                  className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-4"
+                >
+                  <span className="shrink-0 text-sm tabular-nums text-text-soft dark:text-slate-400">
+                    {formatDate(sermon.date)}
+                  </span>
+                  <span className="font-semibold text-foreground hover:underline dark:text-slate-100">
+                    {sermon.title}
+                  </span>
+                  <span className="text-sm text-text-soft dark:text-slate-400">
+                    {sermon.passage}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
       {/* ── Midweek Devotionals ── */}
       {midweek.length > 0 && (
-        <Section id="midweek" className="bg-muted dark:bg-slate-900">
+        <Section id="midweek" className="scroll-mt-16 bg-muted dark:bg-slate-900">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
@@ -207,7 +277,7 @@ export default function SermonsPage() {
       )}
 
       {/* ── Sermon Archive ── */}
-      <Section>
+      <Section id="archive" className="scroll-mt-16">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">Archive</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground dark:text-slate-100">Browse past sermons</h2>

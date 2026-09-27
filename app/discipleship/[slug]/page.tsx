@@ -3,6 +3,8 @@ import { Section } from '@/components/layout/section'
 import { ButtonLink } from '@/components/ui/button-link'
 import { CtaBand } from '@/components/sections/cta-band'
 import { lessons } from '@/data/lessons'
+import { lessonDecks } from '@/data/lesson-decks.generated'
+import { SlideDeck } from '@/components/sections/slide-deck'
 
 export function generateStaticParams() {
   return lessons.map((lesson) => ({ slug: lesson.slug }))
@@ -17,22 +19,69 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   }
 
   const isLastLesson = lesson.lessonNumber === 7
+  const deck = lessonDecks[lesson.slug] ?? []
 
   return (
     <>
       {/* 1. Lesson header */}
       <Section>
-        <div className="max-w-3xl">
+        <div
+          className="max-w-3xl border-l-4 pl-6"
+          style={{ borderColor: lesson.edgeColour }}
+        >
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
             Lesson {lesson.lessonNumber} of 7 — Discipleship
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground dark:text-slate-100">{lesson.title}</h1>
+          <p className="mt-2 text-lg text-navy/70 dark:text-amber-300/70">{lesson.subtitle}</p>
           <p className="mt-6 text-lg leading-8 text-text-soft dark:text-slate-400">{lesson.summary}</p>
+
+          {/* The guide leads every lesson with its purpose; mirror that here. */}
+          <div className="mt-8 rounded-2xl border border-border bg-muted p-5 dark:border-slate-700 dark:bg-slate-900">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy dark:text-amber-300">
+              Purpose
+            </p>
+            <p className="mt-2 text-base leading-7 text-foreground dark:text-slate-200">
+              {lesson.purpose}
+            </p>
+          </div>
+
+          <p className="mt-4 text-sm text-text-soft dark:text-slate-400">
+            Following along in the printed booklet?{' '}
+            <a
+              href="/foundation-guide.pdf?v=2026-09"
+              className="font-semibold text-navy underline underline-offset-4 dark:text-amber-300"
+            >
+              Foundation Guide, pp.&nbsp;{lesson.sourcePages.replace('-', '–')}
+            </a>
+          </p>
         </div>
       </Section>
 
-      {/* 2. Video — embed if available, coming-soon placeholder if not */}
-      <Section className="bg-muted dark:bg-slate-900">
+      {/* 2. Teaching slides — the deck the lesson was taught from, browsable in page */}
+      {deck.length > 0 && (
+        <Section className="bg-muted dark:bg-slate-900">
+          <SlideDeck slides={deck} id={`deck-${lesson.slug}`} title={lesson.title} />
+
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <a
+              href={`/lessons/${lesson.slug}.pdf`}
+              download
+              className="inline-flex items-center gap-2 rounded-2xl bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:bg-navy-soft dark:bg-amber-300 dark:text-navy dark:hover:bg-amber-200"
+            >
+              Download slides (PDF) ↓
+            </a>
+            <span className="text-sm text-text-soft dark:text-slate-400">
+              {deck.length} slides · A4 · for printing and offline reading
+            </span>
+          </div>
+        </Section>
+      )}
+
+      {/* 3. Video — only when there is one, or when no deck stands in for it.
+             Showing a "coming soon" box under a full slide deck is noise. */}
+      {(lesson.videoUrl || deck.length === 0) && (
+        <Section className={deck.length > 0 ? '' : 'bg-muted dark:bg-slate-900'}>
         {lesson.videoUrl ? (
           <>
             <div className="overflow-hidden rounded-3xl border border-border bg-black dark:border-slate-700">
@@ -62,9 +111,10 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             </p>
           </div>
         )}
-      </Section>
+        </Section>
+      )}
 
-      {/* 3. Transcript — only shown when transcript text is provided */}
+      {/* 4. Transcript — only shown when transcript text is provided */}
       {lesson.transcript && (
         <Section>
           <div className="max-w-3xl">
