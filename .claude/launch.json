@@ -4,20 +4,43 @@
     {
       "name": "next-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3100
     },
     {
       "name": "next-start",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start"],
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
       "port": 3100
     },
     {
       "name": "next-dev-alt",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "dev", "-p", "3102"],
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "-p",
+        "3102"
+      ],
       "port": 3102
+    },
+    {
+      "name": "design-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3103",
+        "--directory",
+        "/private/tmp/claude-501/-Users-rovs-Documents-acts242/8778595e-d294-47ff-a11b-0091bb98c29e/scratchpad/design2"
+      ],
+      "port": 3103
     }
   ]
 }

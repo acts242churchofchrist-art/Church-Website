@@ -217,6 +217,105 @@ export const milestoneMonths: MilestoneMonth[] = [
       },
     ],
   },
+  {
+    month: '2026-04',
+    label: 'April 2026',
+    entries: [
+      {
+        date: '2026-04-17',
+        category: 'Teens & Young Adults',
+        title: 'Swimming Day',
+        description:
+          'The teens and young adults spent a day swimming together — one of the season’s open, unhurried gatherings.',
+      },
+      {
+        date: '2026-04-10',
+        category: "Women's Ministry",
+        title: 'Zumba Before Devotional',
+        description:
+          'The women’s and single mom ministry met for Zumba on the Friday, ahead of the midweek devotional.',
+      },
+      {
+        date: '2026-04-02',
+        category: 'Whole Church',
+        title: 'Movie Night — The Shack',
+        description:
+          'The whole church gathered for an evening showing of The Shack, with the children’s ministry joining rather than meeting separately.',
+      },
+      {
+        date: '2026-04',
+        approx: true,
+        category: "Women's Ministry",
+        title: 'Single Mom Ministry Visitation',
+        description:
+          'The women’s ministry continued visiting single mothers in the congregation through the month.',
+      },
+    ],
+  },
+  {
+    month: '2026-03',
+    label: 'March 2026',
+    entries: [
+      {
+        date: '2026-03-22',
+        category: "Women's Ministry",
+        title: 'Women’s Bible Talk',
+        description:
+          'The women’s ministry gathered for a Bible talk, continuing the rhythm of meeting to open Scripture together.',
+      },
+      {
+        date: '2026-03-21',
+        category: "Women's Ministry",
+        title: 'Zumba Morning',
+        description:
+          'A Saturday morning Zumba session hosted by the women’s and single mom ministry.',
+      },
+      {
+        date: '2026-03-15',
+        category: 'Teens & Young Adults',
+        title: 'Video Game Tournament',
+        description:
+          'The teens and young adults held a console tournament — an easy doorway for friends who had not been to church before.',
+      },
+      {
+        date: '2026-03-14',
+        category: "Women's Ministry",
+        title: 'Single Mom Ministry Bible Talk',
+        description:
+          'The single mom ministry met on a Saturday morning for a Bible talk of its own.',
+      },
+      {
+        date: '2026-03-08',
+        category: "Men's Ministry",
+        title: 'Game of the Generals Tournament',
+        description:
+          'The men’s ministry ran a Game of the Generals tournament, the first of the year’s fellowship competitions.',
+      },
+      {
+        date: '2026-03-01',
+        category: 'Children & Youth',
+        title: "Children's Ministry Presentation",
+        description:
+          'The children’s ministry led a presentation for the congregation, opening the year’s season of youth-led services.',
+      },
+      {
+        date: '2026-03',
+        approx: true,
+        category: 'Worship',
+        title: 'Open Auditions for Song Leaders',
+        description:
+          'Auditions were opened to anyone in the congregation who wanted to serve in song leading, alongside a call for song leaders and speakers to arrive earlier on Sundays.',
+      },
+      {
+        date: '2026-03',
+        approx: true,
+        category: 'Whole Church',
+        title: 'Midweek Devotional Moves to Friday',
+        description:
+          'The core group moved the midweek devotional to Friday evenings, the pattern the church still keeps.',
+      },
+    ],
+  },
 ]
 
 export const milestoneCount = milestoneMonths.reduce((sum, m) => sum + m.entries.length, 0)
