@@ -44,6 +44,47 @@ export const upcomingEvents: ChurchEvent[] = [
 
   // DATED EVENTS — add here once the core group sets a date.
   // Past entries belong in data/milestones.ts, not here.
+  {
+    id: 'bible-bowl-materials-2026-10-04',
+    title: 'Bible Bowl Materials',
+    description:
+      'Study materials for the Bible Bowl are given out after the service. Pick yours up if you are taking part.',
+    date: '2026-10-04',
+    location: 'Acts 242 Worship Hall',
+    type: 'special',
+    ministry: 'Teens & Young Adults',
+  },
+  {
+    id: 'bible-bowl-2026-10-11',
+    title: 'Bible Bowl',
+    description:
+      'The Bible Bowl itself — a round of questions on what has been studied, run by the teens and young adults.',
+    date: '2026-10-11',
+    location: 'Acts 242 Worship Hall',
+    type: 'special',
+    ministry: 'Teens & Young Adults',
+  },
+  {
+    id: 'youth-service-2026-10-25',
+    title: 'Youth Service',
+    description:
+      'The young people lead the Sunday service — reading, serving, and taking part up front.',
+    date: '2026-10-25',
+    time: '10:00 AM',
+    location: 'Acts 242 Worship Hall',
+    type: 'service',
+  },
+  {
+    id: 'womens-fellowship-2026-10-25',
+    title: "Women's Fellowship",
+    description:
+      'The women gather straight after the Sunday service, led by Sis. Normie and Sis. Karol.',
+    date: '2026-10-25',
+    time: 'After Sunday worship',
+    location: 'Acts 242 Worship Hall',
+    type: 'fellowship',
+    ministry: "Women's & Single Mom Ministry",
+  },
 ]
 
 /**
@@ -108,7 +149,16 @@ export type PreacherEntry = {
 
 // Add the coming month's assignments after each planning meeting. Past entries are
 // filtered out automatically at build time, so stale rows never reach the page.
-export const preachingSchedule: PreacherEntry[] = []
+export const preachingSchedule: PreacherEntry[] = [
+  { date: '2026-10-04', preacher: 'Bro. Marc', note: 'Sunday worship' },
+  { date: '2026-10-09', preacher: 'Bro. Marc', note: 'Friday devotional' },
+  { date: '2026-10-11', preacher: 'Bro. Marc', note: 'Sunday worship · with Bro. Tony' },
+  { date: '2026-10-16', preacher: 'Bro. Kiev', note: 'Friday devotional' },
+  { date: '2026-10-18', preacher: 'Bro. James', note: 'Sunday worship' },
+  { date: '2026-10-23', preacher: 'Bro. Vince', note: 'Friday devotional' },
+  { date: '2026-10-25', preacher: 'Bro. Marc', note: 'Youth service' },
+  { date: '2026-10-30', preacher: 'Bro. Marc', note: 'Friday devotional · with Bro. Edward' },
+]
 
 // Only show upcoming entries
 export const upcomingPreachingSchedule = preachingSchedule.filter((e) => {
