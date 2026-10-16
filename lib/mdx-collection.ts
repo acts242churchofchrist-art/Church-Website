@@ -6,12 +6,18 @@ import type { Sermon, SermonFrontmatter } from '@/types/content'
 /**
  * Shared loader for the MDX content collections (sermons, midweek devotionals).
  *
- * Results are cached for the lifetime of the process. Every page that needs the
- * full list previously re-read and re-parsed every file on disk: a sermon detail
- * page alone did it three times, which made a build O(N²) in the number of sermons.
- * The build is a short-lived process over read-only content, so caching is safe and
- * turns that back into one read per file.
+ * In a production build, results are cached for the lifetime of the process. Every
+ * page that needs the full list previously re-read and re-parsed every file on disk:
+ * a sermon detail page alone did it three times, which made a build O(N²) in the
+ * number of sermons. A build is a short-lived process over read-only content, so
+ * caching is safe and turns that back into one read per file.
+ *
+ * `next dev` is the opposite: a long-lived process over files someone is editing.
+ * There the cache served whatever was on disk when the server started, so an edited
+ * sermon kept showing its old text until a restart. Outside production every call
+ * reads from disk instead — a few milliseconds per request at this collection's size.
  */
+const CACHE = process.env.NODE_ENV === 'production'
 
 type CollectionOptions = {
   /** Absolute path to the directory holding the .mdx files. */
@@ -91,38 +97,35 @@ export function createMdxCollection(opts: CollectionOptions): MdxCollection {
   const bodyCache = new Map<string, Sermon | null>()
 
   function getAll(): SermonFrontmatter[] {
-    if (listCache) return listCache
-    if (!fs.existsSync(opts.dir)) {
-      listCache = []
-      return listCache
-    }
-    listCache = fs
-      .readdirSync(opts.dir)
-      .filter((f) => f.endsWith('.mdx'))
-      .map((filename) => {
-        const slug = filename.replace(/\.mdx$/, '')
-        const { data } = matter(fs.readFileSync(path.join(opts.dir, filename), 'utf-8'))
-        return toFrontmatter(slug, data as Record<string, unknown>, opts)
-      })
-      .sort((a, b) => b.date.localeCompare(a.date))
-    return listCache
+    if (CACHE && listCache) return listCache
+    const list = !fs.existsSync(opts.dir)
+      ? []
+      : fs
+          .readdirSync(opts.dir)
+          .filter((f) => f.endsWith('.mdx'))
+          .map((filename) => {
+            const slug = filename.replace(/\.mdx$/, '')
+            const { data } = matter(fs.readFileSync(path.join(opts.dir, filename), 'utf-8'))
+            return toFrontmatter(slug, data as Record<string, unknown>, opts)
+          })
+          .sort((a, b) => b.date.localeCompare(a.date))
+    if (CACHE) listCache = list
+    return list
   }
 
   function getBySlug(slug: string): Sermon | null {
-    const cached = bodyCache.get(slug)
-    if (cached !== undefined) return cached
+    if (CACHE) {
+      const cached = bodyCache.get(slug)
+      if (cached !== undefined) return cached
+    }
 
     const filepath = path.join(opts.dir, `${slug}.mdx`)
-    if (!fs.existsSync(filepath)) {
-      bodyCache.set(slug, null)
-      return null
+    let result: Sermon | null = null
+    if (fs.existsSync(filepath)) {
+      const { data, content } = matter(fs.readFileSync(filepath, 'utf-8'))
+      result = { ...toFrontmatter(slug, data as Record<string, unknown>, opts), content }
     }
-    const { data, content } = matter(fs.readFileSync(filepath, 'utf-8'))
-    const result: Sermon = {
-      ...toFrontmatter(slug, data as Record<string, unknown>, opts),
-      content,
-    }
-    bodyCache.set(slug, result)
+    if (CACHE) bodyCache.set(slug, result)
     return result
   }
 
