@@ -154,7 +154,7 @@ export const preachingSchedule: PreacherEntry[] = [
   { date: '2026-10-09', preacher: 'Bro. Marc', note: 'Friday devotional' },
   { date: '2026-10-11', preacher: 'Bro. Marc', note: 'Sunday worship · with Bro. Tony' },
   { date: '2026-10-16', preacher: 'Bro. Kiev', note: 'Friday devotional' },
-  { date: '2026-10-18', preacher: 'Bro. James', note: 'Sunday worship' },
+  { date: '2026-10-18', preacher: 'Bro. Marc', note: 'Sunday worship' },
   { date: '2026-10-23', preacher: 'Bro. Vince', note: 'Friday devotional' },
   { date: '2026-10-25', preacher: 'Bro. Marc', note: 'Youth service' },
   { date: '2026-10-30', preacher: 'Bro. Marc', note: 'Friday devotional · with Bro. Edward' },
