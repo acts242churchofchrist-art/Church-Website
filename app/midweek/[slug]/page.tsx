@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -41,6 +43,44 @@ function formatDate(dateStr: string) {
   })
 }
 
+/**
+ * The poster's pixel size, read from its file header at build time so the hero can
+ * take the poster's own shape. PNG and JPEG are read; anything else falls back to
+ * 16:9, the shape of every midweek thumbnail so far, and `h-auto` still settles on
+ * the real shape once the image loads.
+ *
+ * Only files under public/midweek/ are read. Next traces this read into the route's
+ * server function, and an open-ended `public/${src}` path pulled the whole of
+ * public/ (~79 MB of sermon art and PDFs) into it.
+ */
+function posterSize(src: string): { width: number; height: number } {
+  const fallback = { width: 1280, height: 720 }
+  const prefix = '/midweek/'
+  if (!src.startsWith(prefix)) return fallback
+  let buf: Buffer
+  try {
+    buf = fs.readFileSync(path.join(process.cwd(), 'public', 'midweek', src.slice(prefix.length)))
+  } catch {
+    return fallback
+  }
+  // PNG: width and height are the first two fields of the IHDR chunk.
+  if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+  }
+  // JPEG: walk the segments to the first start-of-frame marker.
+  if (buf.length >= 4 && buf.readUInt16BE(0) === 0xffd8) {
+    let i = 2
+    while (i + 9 < buf.length && buf[i] === 0xff) {
+      const marker = buf[i + 1]
+      if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        return { width: buf.readUInt16BE(i + 7), height: buf.readUInt16BE(i + 5) }
+      }
+      i += 2 + buf.readUInt16BE(i + 2)
+    }
+  }
+  return fallback
+}
+
 export default async function MidweekMessagePage({ params }: Props) {
   const { slug } = await params
   const message = getMidweekBySlug(slug)
@@ -53,6 +93,8 @@ export default async function MidweekMessagePage({ params }: Props) {
   })
 
   const hasPoster = Boolean(message.posterImage)
+  const poster = hasPoster ? posterSize(message.posterImage!) : null
+  const landscape = poster ? poster.width >= poster.height : false
   const hasVideo = Boolean(message.youtubeUrl || message.facebookUrl || message.driveUrl)
   const hasBrochure = Boolean(message.brochureImages?.front || message.brochureImages?.inside)
 
@@ -78,32 +120,64 @@ export default async function MidweekMessagePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ── 1. Hero — poster or text ── */}
-      {hasPoster ? (
-        <div className="relative min-h-[380px] w-full overflow-hidden bg-navy sm:min-h-[460px]">
-          <Image
-            src={message.posterImage!}
-            alt={message.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          {/* gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
-          {/* text */}
-          <div className="absolute inset-0 flex items-end">
-            <div className="mx-auto w-full max-w-content px-4 pb-10 sm:px-6 lg:px-8">
+      {/* ── 1. Hero — poster or text ──
+          Midweek posters so far are 16:9 YouTube thumbnails that already carry the
+          title. Filling a full-width band with `object-cover` cropped that art and laid
+          the h1 over its own headline: on a phone the poster's words were cut off, on
+          desktop the two titles collided. It now gets the sermon pages' treatment: the
+          poster whole on a navy ground, the title beside it on wide screens and below
+          it on narrow ones. The box takes the poster's own shape, so a landscape
+          thumbnail gets a wide column and a portrait poster the sermon pages' narrow one. */}
+      {poster ? (
+        <div className="w-full bg-gradient-to-b from-navy via-navy to-navy-soft">
+          <div
+            className={`mx-auto flex max-w-content flex-col items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:gap-14 lg:px-8 ${
+              landscape ? 'lg:flex-row' : 'sm:flex-row sm:gap-10'
+            }`}
+          >
+            <div
+              className={`w-full shrink-0 ${
+                landscape
+                  ? 'max-w-[640px] lg:max-w-[480px] xl:max-w-[560px]'
+                  : 'max-w-[236px] sm:max-w-[264px] lg:max-w-[320px]'
+              }`}
+            >
+              <div className="overflow-hidden rounded-2xl bg-navy-soft shadow-glow ring-1 ring-white/15">
+                <Image
+                  src={message.posterImage!}
+                  alt={`Midweek devotional poster for ${formatDate(message.date)}`}
+                  width={poster.width}
+                  height={poster.height}
+                  priority
+                  className="h-auto w-full"
+                  sizes={
+                    landscape
+                      ? '(min-width: 1280px) 560px, (min-width: 1024px) 480px, (min-width: 640px) 640px, 100vw'
+                      : '(min-width: 1024px) 320px, (min-width: 640px) 264px, 236px'
+                  }
+                />
+              </div>
+            </div>
+            <div className={`w-full text-center ${landscape ? 'lg:text-left' : 'sm:text-left'}`}>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
                 Midweek Devotional
               </p>
               <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
                 {formatDate(message.date)} — {message.preacher}
               </p>
-              <h1 className="mt-3 max-w-3xl text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 {message.title}
               </h1>
-              <p className="mt-2 text-base font-medium text-white/80">{message.passage}</p>
+              <p className="mt-3 text-base font-medium text-amber-300">{message.passage}</p>
+              {message.summary && (
+                <p
+                  className={`mx-auto mt-4 max-w-2xl text-base leading-7 text-white/80 ${
+                    landscape ? 'lg:mx-0' : 'sm:mx-0'
+                  }`}
+                >
+                  {message.summary}
+                </p>
+              )}
             </div>
           </div>
         </div>
